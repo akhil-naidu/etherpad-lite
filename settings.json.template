@@ -93,7 +93,7 @@
   /*
    * Name your instance!
    */
-  "title": "Etherpad",
+  "title": "Signdesk",
 
   /*
    * Pathname of the favicon you want to use. If null, the skin's favicon is
@@ -222,7 +222,7 @@
   /*
    * The default text of a pad
    */
-  "defaultPadText" : "Welcome to Etherpad!\n\nThis pad text is synchronized as you type, so that everyone viewing this page sees the same text. This allows you to collaborate seamlessly on documents!\n\nGet involved with Etherpad at https:\/\/etherpad.org\n",
+  "defaultPadText" : "Welcome to Signdesk!\n\nThis doc text is synchronized as you type, so that everyone viewing this page sees the same text. This allows you to collaborate seamlessly on documents!\n",
 
   /*
    * Default Pad behavior.
