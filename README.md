@@ -28,10 +28,12 @@ quick reference
 # How to upgrade custom Signdesk repository to the latest version
 ### Step One
 > It is mandatory to have a fork from the master/develop branch of the etherpad-lite.
+
 Once we have the fork of the repo, it will provide us a lot of flexibility in maintaining the repository and also to keep it in sync with the latest updates and security patches.
 
 ### Step Two
 > This step is what makes signdesk independent from etherpad-lite
+
 MuDoc provides you with two extra folders compared to that of the existing master/develop branch of the etherpad-lite, they potentially consists of the theming and features.
 
 In the `src` folder of the root directory, we can find a new folder under the name `plugins` which consists of all the plugins that we provide. This folder can also be used to extend the functionality by creating your own plugins without the need to create a npm package.
