@@ -29,6 +29,9 @@
   color: #485365;
   color: var(--text-color);
 }
+#outerdocbody iframe{
+  padding: 0;
+}
 #sidediv {
   /* Padding must be the same than editor, otherwise it creates problem */
   padding-top: 40px; /* = #innerdocbody iframe vertical padding */

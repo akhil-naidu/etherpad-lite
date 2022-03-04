@@ -1,0 +1,26 @@
+{
+  "parts": [
+    {
+      "name": "page_break",
+      "client_hooks": {
+        "postAceInit": "ep_pagebreak/static/js/page_break",
+        "aceEditorCSS": "ep_pagebreak/static/js/page_break",
+        "aceCreateDomLine": "ep_pagebreak/static/js/page_break",
+        "aceAttribsToClasses": "ep_pagebreak/static/js/page_break",
+        "aceDomLineProcessLineAttributes": "ep_pagebreak/static/js/page_break",
+        "collectContentPre": "ep_pagebreak/static/js/shared",
+        "aceInitialized": "ep_pagebreak/static/js/page_break",
+        "aceKeyEvent": "ep_pagebreak/static/js/page_break",
+        "aceEditEvent": "ep_pagebreak/static/js/page_break"
+      },
+      "hooks": {
+        "eejsBlock_mySettings": "ep_pagebreak/page_break",        
+        "collectContentPre": "ep_pagebreak/static/js/shared",
+        "collectContentPost": "ep_pagebreak/static/js/shared",
+        "getLineHTMLForExport": "ep_pagebreak/index",
+        "eejsBlock_dd_insert" : "ep_pagebreak/page_break"
+        
+      }
+    }
+  ]
+}

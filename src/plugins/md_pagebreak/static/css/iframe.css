@@ -1,0 +1,19 @@
+
+  .pageBreakComputed, .pageBreak {
+    page-break-after: always;
+    -webkit-region-break-inside: avoid;
+    background-color: #f2f3f4;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    cursor: default;
+    width: 114%;
+    margin-left: -7%;
+  }
+
+  .outerBackground{
+    background-color:#f7f7f7 !important;
+    width: 850px;
+    margin:auto;
+    border:none;
+  }
+
