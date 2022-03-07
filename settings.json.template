@@ -598,24 +598,25 @@
    * Uncomment to customize.
    */
 
-  /*
   "toolbar": {
     "left": [
       ["bold", "italic", "underline", "strikethrough"],
+      ["alignLeft", "alignCenter", "alignRight", "alignJustify"],
       ["orderedlist", "unorderedlist", "indent", "outdent"],
       ["undo", "redo"],
-      ["clearauthorship"]
+      ["clearauthorship"],
+      ["addComment"]
     ],
     "right": [
       ["importexport", "timeslider", "savedrevision"],
       ["settings", "embed"],
       ["showusers"]
     ],
+    "inline": [["bold", "italic", "underline", "strikethrough"]],
     "timeslider": [
       ["timeslider_export", "timeslider_returnToPad"]
     ]
   },
-  */
 
   /*
    * Expose Etherpad version in the web interface and in the Server http header.

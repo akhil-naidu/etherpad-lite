@@ -58,8 +58,8 @@ exports.postToolbarInit = (hook, context) => {
     }
   });
   const padOuter = $('iframe[name="ace_outer"]').contents().find('body');
-  $('#inline_toolbar').css('background-color', '#334155');
-  $('#inline_toolbar').css('opacity', '0.7');
+  $('#inline_toolbar').css('background-color', '#1f2937');
+  $('#inline_toolbar').css('opacity', '0.9');
   $('#inline_toolbar').css('color', '#f9fafb');
   $('#inline_toolbar').css('border-radius', '8px');
   $('#inline_toolbar').detach().appendTo(padOuter[0]);
