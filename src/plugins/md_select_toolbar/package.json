@@ -1,0 +1,61 @@
+{
+  "_from": "ep_select_toolbar",
+  "_id": "ep_select_toolbar@0.2.13",
+  "_inBundle": false,
+  "_integrity": "sha512-ypmdIyEbD4xGCtfyclAlstW5A8d5ejdvs6CY2I5nrQvMSSyARYKZnn66BK15yCRxfhV+psn1m6632N4x8cy3lw==",
+  "_location": "/ep_select_toolbar",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "ep_select_toolbar",
+    "name": "ep_select_toolbar",
+    "escapedName": "ep_select_toolbar",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER"
+  ],
+  "_resolved": "https://registry.npmjs.org/ep_select_toolbar/-/ep_select_toolbar-0.2.13.tgz",
+  "_shasum": "878232e32b673c8e2bcc8e3da091574c699369e8",
+  "_spec": "ep_select_toolbar",
+  "_where": "D:\\etherpad-lite",
+  "author": {
+    "name": "John McLear",
+    "email": "john@mclear.co.uk"
+  },
+  "bugs": {
+    "url": "https://github.com/JohnMcLear/ep_select_toolbar/issues"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
+  "description": "Adds inline toolbar support to a Pad",
+  "devDependencies": {
+    "eslint": "^8.10.0",
+    "eslint-config-etherpad": "^3.0.4",
+    "typescript": "^4.6.2"
+  },
+  "engines": {
+    "node": ">=12.17.0"
+  },
+  "funding": {
+    "type": "individual",
+    "url": "https://etherpad.org/"
+  },
+  "homepage": "https://github.com/JohnMcLear/ep_select_toolbar#readme",
+  "name": "ep_select_toolbar",
+  "peerDependencies": {
+    "ep_etherpad-lite": ">=1.8.6"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JohnMcLear/ep_select_toolbar.git"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix ."
+  },
+  "version": "0.2.13"
+}
