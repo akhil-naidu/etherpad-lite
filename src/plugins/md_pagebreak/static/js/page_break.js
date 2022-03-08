@@ -3,6 +3,10 @@ var $ = require('ep_etherpad-lite/static/js/rjquery').$;
 var _ = require('ep_etherpad-lite/static/js/underscore');
 var padcookie = require('ep_etherpad-lite/static/js/pad_cookie').padcookie;
 
+let i=0;
+let j=1;
+let l=0;
+
 exports.postAceInit = function(hook, context){
   var $outerIframeContents = $('iframe[name="ace_outer"]').contents();
   var $innerIframe = $outerIframeContents.find('iframe');
@@ -119,6 +123,11 @@ function doRemovePageBreak(){
 
   // If it's actually a page break..
   if(line.lineNode && (line.lineNode.firstChild && line.lineNode.firstChild.className === "pageBreak")){
+
+    j=j-1;
+    l=l-1;
+
+
     documentAttributeManager.removeAttributeOnLine(firstLine, 'pageBreak'); // remove the page break from the line
     // TODO: Control Z can make this kinda break
 
@@ -178,10 +187,7 @@ exports.aceInitialized = function(hook, context){
   editorInfo.ace_doRemovePageBreak = _(doRemovePageBreak).bind(context);
 }
 
-  
-  let i=0;
-  let j=1;
-  let l=0;
+
 
   
 
@@ -226,6 +232,7 @@ exports.aceKeyEvent = function(hook, callstack, editorInfo, rep, documentAttribu
     // 360*4+44*3
     
     if(h>=i){
+        // document.getElementById('value1').innerHTML=j;
         j=j+1;
         l=l+1;
         callstack.editorInfo.ace_doInsertPageBreak();               
@@ -251,8 +258,8 @@ exports.aceKeyEvent = function(hook, callstack, editorInfo, rep, documentAttribu
 
   // Backspace deletes full line above if it is a pagebreak
   if(k == 8 && evt.type == "keyup"){
-    j=j-1;
-    l=l-1;
+    // j=j-1;
+    // l=l-1;
     callstack.editorInfo.ace_doRemovePageBreak();
    
   }
