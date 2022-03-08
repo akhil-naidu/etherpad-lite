@@ -86,7 +86,7 @@ exports.aceDomLineProcessLineAttributes = function(name, context){
   if (tagIndex !== undefined && type){
     // NOTE THE INLINE CSS IS REQUIRED FOR IT TO WORK WITH PRINTING!   Or is it?
     var modifier = {
-      preHtml: '<div class="pageBreak" contentEditable=false style="page-break-after:always;page-break-inside:avoid;-webkit-region-break-inside: avoid;">',
+      preHtml: `<div class="pageBreak" contentEditable=false style="page-break-after:always;page-break-inside:avoid;-webkit-region-break-inside: avoid;"><div style="background-color:white; padding-left:12px; padding-bottom:8px"> ${j - 1} </div>`,
       postHtml: '</div>',
       processedMarker: true
     };
@@ -211,6 +211,22 @@ exports.aceKeyEvent = function(hook, callstack, editorInfo, rep, documentAttribu
     return true;
   }
 
+  // && (k=='A' || k == 'a') 
+  if((evt.cmdKey) && (k == 65 || k == 97) && evt.type == "keydown"){
+    console.log(evt)
+    // callstack.editorInfo.ace_doInsertPageBreak();
+    console.log('ctrl + A')
+    i=460;
+    console.log(i)
+    evt.preventDefault();
+    return true;
+  }
+
+  if(evt.cmdKey && evt.type == "keydown") {
+    console.log('clicked')
+  }
+
+
   if(k == 13){
     $(HTMLLines).each(function(){ // For each line    
     let height = $(this).height(); // the height of the line
@@ -263,5 +279,5 @@ exports.aceKeyEvent = function(hook, callstack, editorInfo, rep, documentAttribu
     callstack.editorInfo.ace_doRemovePageBreak();
    
   }
-  return false;
+  return true;
 }
