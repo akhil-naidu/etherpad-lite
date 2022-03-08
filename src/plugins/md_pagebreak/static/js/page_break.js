@@ -263,5 +263,5 @@ exports.aceKeyEvent = function(hook, callstack, editorInfo, rep, documentAttribu
     callstack.editorInfo.ace_doRemovePageBreak();
    
   }
-  return true;
+  return false;
 }
