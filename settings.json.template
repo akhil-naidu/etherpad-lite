@@ -233,7 +233,7 @@
     "noColors":         false,
     "showControls":     true,
     "showChat":         true,
-    "showLineNumbers":  true,
+    "showLineNumbers":  false,
     "useMonospaceFont": false,
     "userName":         null,
     "userColor":        null,

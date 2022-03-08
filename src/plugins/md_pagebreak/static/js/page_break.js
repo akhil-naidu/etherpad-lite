@@ -263,7 +263,7 @@ exports.aceKeyEvent = function(hook, callstack, editorInfo, rep, documentAttribu
     callstack.editorInfo.ace_doRemovePageBreak();
    
   }
-  return;
+  return true;
 }
 
 
