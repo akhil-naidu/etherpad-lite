@@ -6,11 +6,44 @@ var padcookie = require('ep_etherpad-lite/static/js/pad_cookie').padcookie;
 let i=0;
 let j=1;
 let l=0;
+let string='';
+
 
 exports.postAceInit = function(hook, context){
   var $outerIframeContents = $('iframe[name="ace_outer"]').contents();
   var $innerIframe = $outerIframeContents.find('iframe');
   var $innerdocbody = $innerIframe.contents().find("#innerdocbody");
+
+
+  var buttonHTML =
+    '<li class="separator"></li><li class="acl-write" id="footer"><a class="grouped-middle" data-l10n-id="pad.toolbar.footer.title" title="Enter footer"><button class="buttonicon buttonicon-settings"></button></a></li>';
+  $(buttonHTML).insertAfter($('.buttonicon-outdent').parent().parent());
+
+  $('#footer').click(() => {
+    $('#editorcontainerbox').find('#addHeaderFooter').toggleClass('popup-show');
+  });
+
+  const form = $('#editorcontainerbox').find('#addHeaderFooter form');
+
+  $(form)
+    .find('#footer-submit')
+    .click((e) => {
+      e.preventDefault();
+
+      const text = $('#editorcontainerbox').find('#id-footer').val();
+
+      string = text;
+
+      $('#editorcontainerbox').find('#addHeaderFooter').toggleClass('popup-show');
+    });
+
+  $(form)
+    .find('#footer-close')
+    .click((e) => {
+      e.preventDefault();
+
+      $('#editorcontainerbox').find('#addHeaderFooter').toggleClass('popup-show');
+    });
 
   var pb = {    
     pageBreaksEnable: function(){
@@ -86,7 +119,7 @@ exports.aceDomLineProcessLineAttributes = function(name, context){
   if (tagIndex !== undefined && type){
     // NOTE THE INLINE CSS IS REQUIRED FOR IT TO WORK WITH PRINTING!   Or is it?
     var modifier = {
-      preHtml: `<div class="pageBreak" contentEditable=false style="page-break-after:always;page-break-inside:avoid;-webkit-region-break-inside: avoid;"><div style="background-color:white; padding-left:12px; padding-bottom:8px"> ${j - 1} </div>`,
+      preHtml: `<div class="pageBreak" contentEditable=false style="page-break-after:always;page-break-inside:avoid;-webkit-region-break-inside: avoid;"><div style="position:relative ; bottom:40px; left:15px">${j-1} ${string}</div>`,
       postHtml: '</div>',
       processedMarker: true
     };
@@ -103,7 +136,7 @@ exports.aceCreateDomLine = function(name, context){
   var tagIndex;
   if (pageBreak){
     var modifier = {
-      extraOpenTags: '<div class=pageBreak contentEditable=false>',
+      extraOpenTags: '<div class=pageBreak contentEditable=false input>',
       extraCloseTags: '</div>',
       cls: cls
     };
@@ -113,6 +146,8 @@ exports.aceCreateDomLine = function(name, context){
 };
 
 function doRemovePageBreak(){
+    j=j-1;
+    l=l-1;
   // Backspace events means you might want to remove a line break, this stops the text ending up
   // on the same line as the page break..
   var rep = this.rep;
@@ -123,11 +158,6 @@ function doRemovePageBreak(){
 
   // If it's actually a page break..
   if(line.lineNode && (line.lineNode.firstChild && line.lineNode.firstChild.className === "pageBreak")){
-
-    j=j-1;
-    l=l-1;
-
-
     documentAttributeManager.removeAttributeOnLine(firstLine, 'pageBreak'); // remove the page break from the line
     // TODO: Control Z can make this kinda break
 
@@ -186,10 +216,7 @@ exports.aceInitialized = function(hook, context){
   editorInfo.ace_doInsertPageBreak = _(doInsertPageBreak).bind(context);
   editorInfo.ace_doRemovePageBreak = _(doRemovePageBreak).bind(context);
 }
-
-
-
-  
+ 
 
 // Listen for Control Enter and if it is control enter then insert page break
 // Also listen for Up key to see if we need to replace focus at position 0.
@@ -211,23 +238,16 @@ exports.aceKeyEvent = function(hook, callstack, editorInfo, rep, documentAttribu
     return true;
   }
 
-  // && (k=='A' || k == 'a') 
-  if((evt.cmdKey) && (k == 65 || k == 97) && evt.type == "keydown"){
-    console.log(evt)
-    // callstack.editorInfo.ace_doInsertPageBreak();
-    console.log('ctrl + A')
-    i=460;
-    console.log(i)
-    evt.preventDefault();
+  if(evt.ctrlKey && k == 65){
+    i=0;
+    j=1;
+    l=0;
+
+    console.log('after',l);
     return true;
   }
 
-  if(evt.cmdKey && evt.type == "keydown") {
-    console.log('clicked')
-  }
-
-
-  if(k == 13){
+  if(k == 13 || evt.type == "keyup" ){
     $(HTMLLines).each(function(){ // For each line    
     let height = $(this).height(); // the height of the line
     y=y+height;
@@ -248,7 +268,9 @@ exports.aceKeyEvent = function(hook, callstack, editorInfo, rep, documentAttribu
     // 360*4+44*3
     
     if(h>=i){
-        // document.getElementById('value1').innerHTML=j;
+      // document.getElementById("pagebr").innerHTML = j;
+      // var lines = $('iframe[name="ace_outer"]').contents().find('iframe').contents().find("#innerdocbody").contents().find(".pagebreak");
+      // $(lines).innerHTML = j;
         j=j+1;
         l=l+1;
         callstack.editorInfo.ace_doInsertPageBreak();               
@@ -274,10 +296,91 @@ exports.aceKeyEvent = function(hook, callstack, editorInfo, rep, documentAttribu
 
   // Backspace deletes full line above if it is a pagebreak
   if(k == 8 && evt.type == "keyup"){
-    // j=j-1;
-    // l=l-1;
+    
     callstack.editorInfo.ace_doRemovePageBreak();
    
   }
-  return false;
+  return;
 }
+
+
+
+// exports.aceEditEvent = function(hook, callstack, editorInfo, rep, documentAttributeManager){
+//   // This seems a little too often to run
+//   // Some more times to drop
+//   if(callstack.callstack.type == "handleClick" || callstack.callstack.type == "idleWorkTimer" || !callstack.callstack.docTextChanged){
+//     // console.log("not doing anything so it's all good", callstack);
+//   }else{
+//     // console.log("aceEditEvent so redrawing", callstack);
+//     // Redraw Page Breaks
+//     reDrawPageBreaks();
+//   }
+// }
+
+// reDrawPageBreaks = function(){
+//   // console.log("redrawing");
+//   var lines = {};
+//   var yHeight = 922.5; // This is dirty and I feel bad for it..
+//   var lineNumber = 0;
+//   var pages = []; // Array of Y px of each page.
+
+//   var HTMLLines = $('iframe[name="ace_outer"]').contents().find('iframe').contents().find("#innerdocbody").children("div");
+
+//   // Remove all computed page breaks
+//   $('iframe[name="ace_outer"]').contents().find('iframe').contents().find("#innerdocbody").children("div").find('.pageBreakComputed').remove();
+//   $(HTMLLines).each(function(){ // For each line
+//     var y = $(this).context?.offsetTop; // y is the offset of this line
+//     var id = $(this)[0].id; // get the id of the link
+//     var height = $(this).height(); // the height of the line
+    
+//     // How many PX since last break?
+//     var lastLine = lineNumber-1;
+//     // Note that this is written like this because I don't trust using y offsets..
+//     if(!lines[lastLine]){ // if this is the first line..
+//       var previousY = 0;
+//       var pxSinceLastBreak = 0;
+//     }else{ // we're not processing the first line
+//       if(lines[lastLine].pxSinceLastBreak == 0){ // if it's the second line..
+//         // if it's getting the px of the first line..
+//         var previousY = lines[lastLine].height;
+//       }else{
+//         var previousY = lines[lastLine].pxSinceLastBreak;
+//       }
+//       var pxSinceLastBreak = previousY + height;
+//     }
+
+//     // Does it already have any children with teh class pageBreak?
+//     var manualBreak = $(this).children().hasClass("pageBreak");
+
+//     // If it's a manualBreak then reset pxSinceLastBreak to 0;
+//     if(manualBreak){
+//       pxSinceLastBreak = 0;
+//       // console.log("MANUAL pxSinceLastBreak", pxSinceLastBreak, "height", height);
+//       pages.push(pxSinceLastBreak + height);
+//     }
+
+//     // Should this be a line break?
+//     var computedBreak = ((pxSinceLastBreak + height) >= yHeight);
+//     if(computedBreak){
+//       // is it already a page break?
+//       var isAlreadyPageBreak = $(this).find(".pageBreakComputed").length != 0;
+//       // If it's not already a page break append a page break
+//       if(!isAlreadyPageBreak){
+//         // console.log("Adding break as PX since last break is ", pxSinceLastBreak + height);
+//         $(this).append("<div class='pageBreakComputed' contentEditable=false></div>");
+//         // console.log("AUTOMATIC pxSinceLastBreak", pxSinceLastBreak, "height", height);
+//         pages.push(pxSinceLastBreak + height);
+//       }
+//       pxSinceLastBreak = 0;
+//     }
+//     lines[lineNumber] = {
+//       pxSinceLastBreak : pxSinceLastBreak,
+//       manualBreak : manualBreak,
+//       computedBreak : computedBreak,
+//       id : id,
+//       y : y,
+//       height : height
+//     }
+//     lineNumber++;
+//   });
+// }
