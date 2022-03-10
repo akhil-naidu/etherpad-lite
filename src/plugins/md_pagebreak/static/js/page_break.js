@@ -59,6 +59,54 @@ exports.postAceInit = function(hook, context){
     headerPosition=hright;
   })
 
+  $(form).find('#header-img').click((e)=>{
+    e.preventDefault()
+    // $(form).find('#header-img').remove();
+    // const fileInputHtml = `<input
+    // style="width:1px;height:1px;z-index:-10000;"
+    // id="upload_file" type="file" />`;
+    // const fileInputHtml = `<div>Hello</div>`
+    // $(form).find('#header-img').append(fileInputHtml);
+
+    // $(form).find('#upload_file').on('change', (e) => {
+    //   const files = e.target.files;
+    //   if (!files.length) {
+    //     return 'Please choose a file to upload first.';
+    //   }
+    //   const file = files[0];
+
+    //   if (!_isValid(file)) {
+    //     return;
+    //   }
+    // });
+      $(form).find('#upload_header').trigger("click");
+      // $(form).find('#upload_file').on("click", function(){
+        
+      //   var ext = $('#upload_file').val().split('.').pop().toLowerCase();
+      // if($.inArray(ext, ['gif','png','jpg','jpeg']) == -1) {
+      //   $(".error_msg").text("Not an Image...");
+      // } else {
+      //   $(".error_msg").text("");
+      //   btnOuter.addClass("file_uploading");
+      //   setTimeout(function(){
+      //     btnOuter.addClass("file_uploaded");
+      //   },3000);
+
+      //   // URL address of uploaded file
+      //   var uploadedFile = URL.createObjectURL(e.target.files[0]);  
+      //   setTimeout(function(){
+      //     $("#uploaded_view").append('<img src="'+uploadedFile+'" />').addClass("show");
+      //   },3500);
+      // }
+
+      // })    
+  })
+
+  $(form).find('#footer-img').click((e)=>{
+    e.preventDefault()
+    $(form).find('#upload_footer').trigger("click");
+  })
+
   $(form)
     .find('#footer-submit')
     .click((e) => {
