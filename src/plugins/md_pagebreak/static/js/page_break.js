@@ -7,6 +7,7 @@ let i=0;
 let j=1;
 let l=0;
 let string='';
+let position='left';
 
 
 exports.postAceInit = function(hook, context){
@@ -16,7 +17,7 @@ exports.postAceInit = function(hook, context){
 
 
   var buttonHTML =
-    '<li class="separator"></li><li class="acl-write" id="footer"><a class="grouped-middle" data-l10n-id="pad.toolbar.footer.title" title="Enter footer"><button class="buttonicon buttonicon-settings"></button></a></li>';
+    '<li class="separator"></li><li class="acl-write" id="footer"><a class="grouped-middle" data-l10n-id="pad.toolbar.footer.title" title="Enter footer"><button class="buttonicon icon-credit-card-alt"></button></a></li>';
   $(buttonHTML).insertAfter($('.buttonicon-outdent').parent().parent());
 
   $('#footer').click(() => {
@@ -24,6 +25,22 @@ exports.postAceInit = function(hook, context){
   });
 
   const form = $('#editorcontainerbox').find('#addHeaderFooter form');
+
+  $(form).find('#footer-left').click((e)=>{
+    e.preventDefault()
+    const left='left';
+    position=left;
+  })
+  $(form).find('#footer-middle').click((e)=>{
+    e.preventDefault()
+    const middle='center';
+    position=middle;
+  })
+  $(form).find('#footer-right').click((e)=>{
+    e.preventDefault()
+    const right='end';
+    position=right;
+  })
 
   $(form)
     .find('#footer-submit')
@@ -119,7 +136,7 @@ exports.aceDomLineProcessLineAttributes = function(name, context){
   if (tagIndex !== undefined && type){
     // NOTE THE INLINE CSS IS REQUIRED FOR IT TO WORK WITH PRINTING!   Or is it?
     var modifier = {
-      preHtml: `<div class="pageBreak" contentEditable=false style="page-break-after:always;page-break-inside:avoid;-webkit-region-break-inside: avoid;"><div style="position:relative ; bottom:40px; left:15px">${j-1} ${string}</div>`,
+      preHtml: `<div class="pageBreak" contentEditable=false style="page-break-after:always;page-break-inside:avoid;-webkit-region-break-inside: avoid;"><div style="position:relative ; bottom:40px;"><div style="position:absolute; left:15px;">${j-1} </div><div style="display:flex; width:95%; position:absolute; left:25px; justify-content:${position}"><div>${string}</div></div></div>`,
       postHtml: '</div>',
       processedMarker: true
     };

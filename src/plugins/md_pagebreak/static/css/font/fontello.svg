@@ -1,0 +1,12 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg">
+<metadata>Copyright (C) 2022 by original authors @ fontello.com</metadata>
+<defs>
+<font id="fontello" horiz-adv-x="1000" >
+<font-face font-family="fontello" font-weight="400" font-stretch="normal" units-per-em="1000" ascent="850" descent="-150" />
+<missing-glyph horiz-adv-x="1000" />
+<glyph glyph-name="credit-card-alt" unicode="&#xf283;" d="M0 11v339h1286v-339q0-37-26-63t-64-27h-1107q-36 0-63 27t-26 63z m357 125v-72h214v72h-214z m-214 0v-72h143v72h-143z m1053 643q37 0 64-27t26-63v-125h-1286v125q0 37 26 63t63 27h1107z" horiz-adv-x="1285.7" />
+</font>
+</defs>
+</svg>
