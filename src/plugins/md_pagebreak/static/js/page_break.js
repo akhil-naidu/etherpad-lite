@@ -6,8 +6,10 @@ var padcookie = require('ep_etherpad-lite/static/js/pad_cookie').padcookie;
 let i=0;
 let j=1;
 let l=0;
-let string='';
-let position='left';
+let footer='';
+let header='';
+let footerPosition='left';
+let headerPosition='left';
 
 
 exports.postAceInit = function(hook, context){
@@ -28,18 +30,33 @@ exports.postAceInit = function(hook, context){
 
   $(form).find('#footer-left').click((e)=>{
     e.preventDefault()
-    const left='left';
-    position=left;
+    const fleft='left';
+    footerPosition=fleft;
   })
   $(form).find('#footer-middle').click((e)=>{
     e.preventDefault()
-    const middle='center';
-    position=middle;
+    const fmiddle='center';
+    footerPosition=fmiddle;
   })
   $(form).find('#footer-right').click((e)=>{
     e.preventDefault()
-    const right='end';
-    position=right;
+    const fright='end';
+    footerPosition=fright;
+  })
+  $(form).find('#header-left').click((e)=>{
+    e.preventDefault()
+    const hleft='left';
+    headerPosition=hleft;
+  })
+  $(form).find('#header-middle').click((e)=>{
+    e.preventDefault()
+    const hmiddle='center';
+    headerPosition=hmiddle;
+  })
+  $(form).find('#header-right').click((e)=>{
+    e.preventDefault()
+    const hright='end';
+    headerPosition=hright;
   })
 
   $(form)
@@ -47,9 +64,11 @@ exports.postAceInit = function(hook, context){
     .click((e) => {
       e.preventDefault();
 
-      const text = $('#editorcontainerbox').find('#id-footer').val();
+      const footertext = $('#editorcontainerbox').find('#id-footer').val();
+      const headertext = $('#editorcontainerbox').find('#id-header').val();
 
-      string = text;
+      footer = footertext;
+      header = headertext;
 
       $('#editorcontainerbox').find('#addHeaderFooter').toggleClass('popup-show');
     });
@@ -136,8 +155,8 @@ exports.aceDomLineProcessLineAttributes = function(name, context){
   if (tagIndex !== undefined && type){
     // NOTE THE INLINE CSS IS REQUIRED FOR IT TO WORK WITH PRINTING!   Or is it?
     var modifier = {
-      preHtml: `<div class="pageBreak" contentEditable=false style="page-break-after:always;page-break-inside:avoid;-webkit-region-break-inside: avoid;"><div style="position:relative ; bottom:40px;"><div style="position:absolute; left:15px;">${j-1} </div><div style="display:flex; width:95%; position:absolute; left:25px; justify-content:${position}"><div>${string}</div></div></div>`,
-      postHtml: '</div>',
+      preHtml: `<div class="pageBreak" contentEditable=false style="page-break-after:always;page-break-inside:avoid;-webkit-region-break-inside: avoid;"><div style="position:relative ; bottom:40px;"><div style="position:absolute; left:15px;">${j-1} </div><div style="display:flex; width:95%; position:absolute; left:25px; justify-content:${footerPosition}"><div>${footer}</div></div></div>`,
+      postHtml: `</div><div style="display:flex; position:relative; width:114%; margin-left:-7%; bottom:25px; justify-content:${headerPosition}"><div style="margin:0px 10px 0px 10px;">${header}</div></div></div>`,
       processedMarker: true
     };
     return [modifier]; // return the modifier

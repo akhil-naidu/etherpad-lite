@@ -324,20 +324,23 @@
       width: fit-content;
       min-width: 28%;">
         <div class="popup-content" style="width: 95%;">
-          <h1>Add Footer</h1>
+          <h1>Add Header and Footer</h1>
           <form >
             <div style="display: block;">
               <div style="display: flex; align-items: center;">
+                <label for="header" >Header</label> 
+                <input type="text" name="header" id="id-header" style="margin: 0 0 0 13px;"/>
+                <button id="header-left" class="buttonicon buttonicon-align-left" style="margin-left: 10px;margin-right: 5px;"></button>
+                <button id="header-middle" class="buttonicon buttonicon-align-center" style="margin-left: 5px;margin-right: 5px;"></button>
+                <button id="header-right" class="buttonicon buttonicon-align-right" style="margin-left: 5px;"></button>
+              </div>
+              <br />
+              <div style="display: flex; align-items: center;">
                 <label for="footer" >Footer</label> 
-                <br />
                 <input type="text" name="footer" id="id-footer" style="margin: 0 0 0 20px;"/>
                 <button id="footer-left" class="buttonicon buttonicon-align-left" style="margin-left: 10px;margin-right: 5px;"></button>
                 <button id="footer-middle" class="buttonicon buttonicon-align-center" style="margin-left: 5px;margin-right: 5px;"></button>
                 <button id="footer-right" class="buttonicon buttonicon-align-right" style="margin-left: 5px;"></button>
-              </div>
-              <br />
-              <div style="display: flex; justify-content: flex-end;">
-                
               </div>
             </div>
             <br />
