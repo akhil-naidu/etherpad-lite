@@ -10,6 +10,10 @@ let footer='';
 let header='';
 let footerPosition='left';
 let headerPosition='left';
+let headerImg='';
+let footerImg= '';
+let headerURL='';
+let footerURL = '';
 
 
 exports.postAceInit = function(hook, context){
@@ -60,66 +64,62 @@ exports.postAceInit = function(hook, context){
   })
 
   $(form).find('#header-img').click((e)=>{
-    e.preventDefault()
-    // $(form).find('#header-img').remove();
-    // const fileInputHtml = `<input
-    // style="width:1px;height:1px;z-index:-10000;"
-    // id="upload_file" type="file" />`;
-    // const fileInputHtml = `<div>Hello</div>`
-    // $(form).find('#header-img').append(fileInputHtml);
-
-    // $(form).find('#upload_file').on('change', (e) => {
-    //   const files = e.target.files;
-    //   if (!files.length) {
-    //     return 'Please choose a file to upload first.';
-    //   }
-    //   const file = files[0];
-
-    //   if (!_isValid(file)) {
-    //     return;
-    //   }
-    // });
-      $(form).find('#upload_header').trigger("click");
-      // $(form).find('#upload_file').on("click", function(){
-        
-      //   var ext = $('#upload_file').val().split('.').pop().toLowerCase();
-      // if($.inArray(ext, ['gif','png','jpg','jpeg']) == -1) {
-      //   $(".error_msg").text("Not an Image...");
-      // } else {
-      //   $(".error_msg").text("");
-      //   btnOuter.addClass("file_uploading");
-      //   setTimeout(function(){
-      //     btnOuter.addClass("file_uploaded");
-      //   },3000);
-
-      //   // URL address of uploaded file
-      //   var uploadedFile = URL.createObjectURL(e.target.files[0]);  
-      //   setTimeout(function(){
-      //     $("#uploaded_view").append('<img src="'+uploadedFile+'" />').addClass("show");
-      //   },3500);
-      // }
-
-      // })    
+    e.preventDefault();
+    $(form).find('#upload_header').trigger("click");
+    $(form).find('#upload_header').on("click",function(e) {        
+      var ext1 = $('#upload_header').val().split('.').pop().toLowerCase();
+      window.console.log(ext1);
+      if($.inArray(ext1, ['gif','png','jpg','jpeg']) == -1) {
+      $(".error_msg").text("Not an Image...");
+      } 
+      else {
+        $(".error_msg").text(""); 
+        // URL address of uploaded file
+        headerImg = URL.createObjectURL(e.target.files[0]); 
+        window.console.log(headerImg);
+        headerURL=headerImg;
+        // setTimeout(function(){
+        //   window.console.log('hello', headerURL)
+        // },3500);
+      }
+    })    
   })
-
   $(form).find('#footer-img').click((e)=>{
-    e.preventDefault()
+    e.preventDefault();
     $(form).find('#upload_footer').trigger("click");
+    $(form).find('#upload_footer').on("click", function(e) {        
+      var ext2 = $('#upload_footer').val().split('.').pop().toLowerCase();
+      window.console.log(ext2);
+      if($.inArray(ext2, ['gif','png','jpg','jpeg']) == -1) {
+      $(".error_msg").text("Not an Image...");
+      } 
+      else {
+        $(".error_msg").text(""); 
+        // URL address of uploaded file
+        footerImg = URL.createObjectURL(e.target.files[0]); 
+        window.console.log(footerImg);
+        footerURL=footerImg;
+        // setTimeout(function(){
+        //   window.console.log('hello', footerURL)
+        // },3500);
+      }
+    })
   })
 
-  $(form)
-    .find('#footer-submit')
-    .click((e) => {
-      e.preventDefault();
+  $(form).find('#footer-submit').click((e) => {
+    e.preventDefault();
 
-      const footertext = $('#editorcontainerbox').find('#id-footer').val();
-      const headertext = $('#editorcontainerbox').find('#id-header').val();
+    const footertext = $('#editorcontainerbox').find('#id-footer').val();
+    const headertext = $('#editorcontainerbox').find('#id-header').val();
 
-      footer = footertext;
-      header = headertext;
+    footer = footertext;
+    header = headertext;
+    headerURL = headerImg;
+    footerURL = footerImg;
+    window.console.log(headerURL);
 
-      $('#editorcontainerbox').find('#addHeaderFooter').toggleClass('popup-show');
-    });
+    $('#editorcontainerbox').find('#addHeaderFooter').toggleClass('popup-show');
+  });
 
   $(form)
     .find('#footer-close')
@@ -203,8 +203,8 @@ exports.aceDomLineProcessLineAttributes = function(name, context){
   if (tagIndex !== undefined && type){
     // NOTE THE INLINE CSS IS REQUIRED FOR IT TO WORK WITH PRINTING!   Or is it?
     var modifier = {
-      preHtml: `<div class="pageBreak" contentEditable=false style="page-break-after:always;page-break-inside:avoid;-webkit-region-break-inside: avoid;"><div style="position:relative ; bottom:40px;"><div style="position:absolute; left:15px;">${j-1} </div><div style="display:flex; width:95%; position:absolute; left:25px; justify-content:${footerPosition}"><div>${footer}</div></div></div>`,
-      postHtml: `</div><div style="display:flex; position:relative; width:114%; margin-left:-7%; bottom:25px; justify-content:${headerPosition}"><div style="margin:0px 10px 0px 10px;">${header}</div></div></div>`,
+      preHtml: `<div class="pageBreak" contentEditable=false style="page-break-after:always;page-break-inside:avoid;-webkit-region-break-inside: avoid;"><div style="display:flex; position:relative; bottom:75px; align-items:end; width:4%; justify-content:${footerPosition};"><div style="position:fixed; left:15px;">${j-1} </div><div"><div>${footer} <img src="${footerURL}" style="height:40px; width:60px;" /></div></div></div>`,
+      postHtml: `</div><div style="display:flex; position:relative; width:114%; margin-left:-7%; bottom:35px; justify-content:${headerPosition}"><div style="margin:0px 10px 0px 10px;">${header} <img src="${headerURL}" style="height:40px; width:60px;" /></div></div></div>`,
       processedMarker: true
     };
     return [modifier]; // return the modifier
@@ -327,7 +327,7 @@ exports.aceKeyEvent = function(hook, callstack, editorInfo, rep, documentAttribu
     j=1;
     l=0;
 
-    console.log('after',l);
+    // console.log('after',l);
     return true;
   }
 
@@ -335,21 +335,17 @@ exports.aceKeyEvent = function(hook, callstack, editorInfo, rep, documentAttribu
     $(HTMLLines).each(function(){ // For each line    
     let height = $(this).height(); // the height of the line
     y=y+height;
-    // console.log(y);
+    // console.log(y);   
     }); 
-    h = h+y;
-    console.log('h=',h);
-    console.log('i=',i);
-    console.log('j=',j);
-    console.log('k=',l)
-    i=((460*j)+(40*l))
+    h=h+y;
+    i=((460*j)+(40*l));
+   
+    // console.log('h=',h);
+    // console.log('i=',i);
+    // console.log('j=',j);
+    // console.log('k=',l)
+   
     // console.log(i);
-
-    // find out the remainder 
-    // 360*1+44*0
-    // 360*2+44*1
-    // 360*3+44*2
-    // 360*4+44*3
     
     if(h>=i){
       // document.getElementById("pagebr").innerHTML = j;
