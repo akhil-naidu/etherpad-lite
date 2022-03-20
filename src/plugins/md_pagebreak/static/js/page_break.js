@@ -203,7 +203,7 @@ exports.aceDomLineProcessLineAttributes = function(name, context){
   if (tagIndex !== undefined && type){
     // NOTE THE INLINE CSS IS REQUIRED FOR IT TO WORK WITH PRINTING!   Or is it?
     var modifier = {
-      preHtml: `<div class="pageBreak" contentEditable=false style="page-break-after:always;page-break-inside:avoid;-webkit-region-break-inside: avoid;"><div style="display:flex; position:relative; bottom:75px; align-items:end; width:4%; justify-content:${footerPosition};"><div style="position:fixed; left:15px;">${j-1} </div><div"><div>${footer} <img src="${footerURL}" style="height:40px; width:60px;" /></div></div></div>`,
+      preHtml: `<div class="pageBreak" contentEditable=false style="page-break-after:always;page-break-inside:avoid;-webkit-region-break-inside: avoid;"><div style="display:flex; position:relative; bottom:75px; align-items:end; width:4%; justify-content:${footerPosition};"><div style="position:fixed; left:15px;"></div><div"><div>${footer} <img src="${footerURL}" style="height:40px; width:60px;" /></div></div></div>`,
       postHtml: `</div><div style="display:flex; position:relative; width:114%; margin-left:-7%; bottom:35px; justify-content:${headerPosition}"><div style="margin:0px 10px 0px 10px;">${header} <img src="${headerURL}" style="height:40px; width:60px;" /></div></div></div>`,
       processedMarker: true
     };
