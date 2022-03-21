@@ -203,7 +203,7 @@ exports.aceDomLineProcessLineAttributes = function(name, context){
   if (tagIndex !== undefined && type){
     // NOTE THE INLINE CSS IS REQUIRED FOR IT TO WORK WITH PRINTING!   Or is it?
     var modifier = {
-      preHtml: `<div class="pageBreak" contentEditable=false style="page-break-after:always;page-break-inside:avoid;-webkit-region-break-inside: avoid;"><div style="display:flex; position:relative; bottom:75px; align-items:end; width:4%; justify-content:${footerPosition};"><div style="position:fixed; left:15px;"></div><div"><div>${footer} <img src="${footerURL}" style="height:40px; width:60px;" /></div></div></div>`,
+      preHtml: `<div class="pageBreak" contentEditable=false style="page-break-after:always;page-break-inside:avoid;-webkit-region-break-inside: avoid;"><div style="display:flex; position:relative; bottom:75px; align-items:end; width:4%; justify-content:${footerPosition};"><div style="position:fixed; left:15px;">${l+1} </div><div"><div>${footer} <img src="${footerURL}" style="height:40px; width:60px;" /></div></div></div>`,
       postHtml: `</div><div style="display:flex; position:relative; width:114%; margin-left:-7%; bottom:35px; justify-content:${headerPosition}"><div style="margin:0px 10px 0px 10px;">${header} <img src="${headerURL}" style="height:40px; width:60px;" /></div></div></div>`,
       processedMarker: true
     };
@@ -241,8 +241,8 @@ function doRemovePageBreak(){
   // If it's actually a page break..
   if(line.lineNode && (line.lineNode.firstChild && line.lineNode.firstChild.className === "pageBreak")){
     j=j-1;
-    // l=l-1;
-    l=$('iframe[name="ace_outer"]').contents().find('iframe').contents().find("#innerdocbody").children("div").find('.pageBreak').length;
+    l=l-1;
+    // l=$('iframe[name="ace_outer"]').contents().find('iframe').contents().find("#innerdocbody").children("div").find('.pageBreak').length;
     documentAttributeManager.removeAttributeOnLine(firstLine, 'pageBreak'); // remove the page break from the line
     // TODO: Control Z can make this kinda break
 
@@ -333,6 +333,11 @@ exports.aceKeyEvent = function(hook, callstack, editorInfo, rep, documentAttribu
     return true;
   }
 
+  if (l == 0) {
+    i=0;
+    j=1;
+  }
+
   if((k == 13 || evt.type == "keyup") && k != 8 ){
     $(HTMLLines).each(function(){ // For each line    
     let height = $(this).height(); // the height of the line
@@ -348,7 +353,7 @@ exports.aceKeyEvent = function(hook, callstack, editorInfo, rep, documentAttribu
     console.log('j=',j);   
     // console.log(i);    
     console.log('pagebreak=',l);
-
+    // $('iframe[name="ace_outer"]').contents().find('iframe').contents().find("#innerdocbody").children("div").find('.pageBreak').remove()
     if(h>=i){
       // document.getElementById("pagebr").innerHTML = j;
       // var lines = $('iframe[name="ace_outer"]').contents().find('iframe').contents().find("#innerdocbody").contents().find(".pagebreak");

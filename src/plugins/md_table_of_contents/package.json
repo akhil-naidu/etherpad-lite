@@ -1,0 +1,65 @@
+{
+  "_from": "ep_table_of_contents",
+  "_id": "ep_table_of_contents@0.3.39",
+  "_inBundle": false,
+  "_integrity": "sha512-mLgu9OILB7dWkX35YlR70R3q+Ask97QKKNvQimU6GCeDUUB+AYcKpYeUcnlKryUL8lWvH95NCk3FDD+0GBhV5Q==",
+  "_location": "/ep_table_of_contents",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "ep_table_of_contents",
+    "name": "ep_table_of_contents",
+    "escapedName": "ep_table_of_contents",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER"
+  ],
+  "_resolved": "https://registry.npmjs.org/ep_table_of_contents/-/ep_table_of_contents-0.3.39.tgz",
+  "_shasum": "a993abcc30f2255d4a0801dba093b3b674b4941b",
+  "_spec": "ep_table_of_contents",
+  "_where": "/Users/dev/Github/signdesk/etherpad-lite/src",
+  "author": {
+    "name": "John McLear",
+    "email": "john@mclear.co.uk",
+    "url": "http://mclear.co.uk"
+  },
+  "bugs": {
+    "url": "https://github.com/JohnMcLear/ep_table_of_contents/issues"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
+  "description": "View a table of contents for your pad",
+  "devDependencies": {
+    "eslint": "^8.10.0",
+    "eslint-config-etherpad": "^3.0.4",
+    "typescript": "^4.6.2"
+  },
+  "dist": {
+    "shasum": "6d55c2e632bfb0e7bc7f102c56a29e27d0dc99aa"
+  },
+  "engines": {
+    "node": ">=12.17.0"
+  },
+  "funding": {
+    "type": "individual",
+    "url": "https://etherpad.org/"
+  },
+  "homepage": "https://github.com/JohnMcLear/ep_table_of_contents#readme",
+  "name": "ep_table_of_contents",
+  "peerDependencies": {
+    "ep_etherpad-lite": ">=1.8.6"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JohnMcLear/ep_table_of_contents.git"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix ."
+  },
+  "version": "0.3.39"
+}
