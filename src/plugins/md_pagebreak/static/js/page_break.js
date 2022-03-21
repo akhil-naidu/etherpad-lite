@@ -230,8 +230,6 @@ exports.aceCreateDomLine = function(name, context){
 };
 
 function doRemovePageBreak(){
-    j=j-1;
-    l=l-1;
   // Backspace events means you might want to remove a line break, this stops the text ending up
   // on the same line as the page break..
   var rep = this.rep;
@@ -242,6 +240,9 @@ function doRemovePageBreak(){
 
   // If it's actually a page break..
   if(line.lineNode && (line.lineNode.firstChild && line.lineNode.firstChild.className === "pageBreak")){
+    j=j-1;
+    // l=l-1;
+    l=$('iframe[name="ace_outer"]').contents().find('iframe').contents().find("#innerdocbody").children("div").find('.pageBreak').length;
     documentAttributeManager.removeAttributeOnLine(firstLine, 'pageBreak'); // remove the page break from the line
     // TODO: Control Z can make this kinda break
 
@@ -326,34 +327,37 @@ exports.aceKeyEvent = function(hook, callstack, editorInfo, rep, documentAttribu
     i=0;
     j=1;
     l=0;
+    // l=$('iframe[name="ace_outer"]').contents().find('iframe').contents().find("#innerdocbody").children("div").find('.pageBreak').length;
 
     // console.log('after',l);
     return true;
   }
 
-  if(k == 13 || evt.type == "keyup" ){
+  if((k == 13 || evt.type == "keyup") && k != 8 ){
     $(HTMLLines).each(function(){ // For each line    
     let height = $(this).height(); // the height of the line
     y=y+height;
+    l=$('iframe[name="ace_outer"]').contents().find('iframe').contents().find("#innerdocbody").children("div").find('.pageBreak').length;
     // console.log(y);   
     }); 
     h=h+y;
     i=((460*j)+(40*l));
    
-    // console.log('h=',h);
-    // console.log('i=',i);
-    // console.log('j=',j);
-    // console.log('k=',l)
-   
-    // console.log(i);
-    
+    console.log('h=',h);
+    console.log('i=',i);
+    console.log('j=',j);   
+    // console.log(i);    
+    console.log('pagebreak=',l);
+
     if(h>=i){
       // document.getElementById("pagebr").innerHTML = j;
       // var lines = $('iframe[name="ace_outer"]').contents().find('iframe').contents().find("#innerdocbody").contents().find(".pagebreak");
       // $(lines).innerHTML = j;
         j=j+1;
-        l=l+1;
-        callstack.editorInfo.ace_doInsertPageBreak();               
+        
+        callstack.editorInfo.ace_doInsertPageBreak();   
+        l=$('iframe[name="ace_outer"]').contents().find('iframe').contents().find("#innerdocbody").children("div").find('.pageBreak').length;
+
     }      
       // console.log('after',h);
       // console.log('after',i); 
@@ -380,7 +384,7 @@ exports.aceKeyEvent = function(hook, callstack, editorInfo, rep, documentAttribu
     callstack.editorInfo.ace_doRemovePageBreak();
    
   }
-  return;
+  return false;
 }
 
 
