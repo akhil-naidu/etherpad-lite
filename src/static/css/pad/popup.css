@@ -5,7 +5,9 @@
 .popup > .popup-content {
   transform: scale(0.7);
   opacity: 0;
-  transition: all 0.3s cubic-bezier(0.74, -0.05, 0.27, 1.75)
+  transition: all 0.3s cubic-bezier(0.74, -0.05, 0.27, 1.75);
+  position: absolute;
+  bottom: 0;
 }
 
 .popup.popup-show > .popup-content, .popup#users.chatAndUsers > .popup-content {
