@@ -57,6 +57,7 @@
 }
 #gritter-container.bottom .gritter-item.popup > .popup-content {
   transform: scale(0.8) translateY(0px);
+  display: none;
 }
 
 .gritter-item.popup.popup-show > .popup-content {
@@ -69,7 +70,6 @@
   }
   #gritter-container.bottom .gritter-item.popup > .popup-content {
     transform: scale(1) translateY(0px) !important;
-    display: none;
   }
   .gritter-item.popup.popup-show > .popup-content {
     transform: scale(1) translateY(0px) !important;
