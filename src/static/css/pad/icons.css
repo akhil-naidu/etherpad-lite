@@ -10,6 +10,38 @@
 
 }
 
+#header-img:hover{  
+    background: #f2f3f4;  
+}
+
+#header-left:hover{  
+  background: #f2f3f4;  
+}
+
+#header-right:hover{  
+  background: #f2f3f4;  
+}
+
+#header-middle:hover{  
+  background: #f2f3f4;  
+}
+
+#footer-img:hover{  
+  background: #f2f3f4;  
+}
+
+#footer-left:hover{  
+background: #f2f3f4;  
+}
+
+#footer-right:hover{  
+background: #f2f3f4;  
+}
+
+#footer-middle:hover{  
+background: #f2f3f4;  
+}
+
 .buttonicon {
   border: none;
   padding: 0;

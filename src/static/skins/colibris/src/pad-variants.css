@@ -136,6 +136,7 @@
 
 .popup#users.chatAndUsers > .popup-content {
   border: none;
+  position: relative;
   border-bottom: 0px solid #ccc;
   border-left: 0px solid #ccc;
   border-right: 0;

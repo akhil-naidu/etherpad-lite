@@ -23,7 +23,7 @@ exports.postAceInit = function(hook, context){
 
 
   var buttonHTML =
-    '<li class="separator"></li><li class="acl-write" id="footer"><a class="grouped-middle" data-l10n-id="pad.toolbar.footer.title" title="Enter footer"><button class="buttonicon buttonicon-pencil"></button></a></li>';
+    '<li class="separator"></li><li class="acl-write" id="footer"><a class="grouped-middle" data-l10n-id="pad.toolbar.footer.title" title="Enter Header & Footer"><button class="buttonicon buttonicon-pencil"></button></a></li>';
   $(buttonHTML).insertAfter($('.buttonicon-outdent').parent().parent());
 
   $('#footer').click(() => {
