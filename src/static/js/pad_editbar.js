@@ -28,6 +28,7 @@ const padutils = require('./pad_utils').padutils;
 const padeditor = require('./pad_editor').padeditor;
 const padsavedrevs = require('./pad_savedrevs');
 const _ = require('underscore');
+const { $ } = require('./rjquery');
 require('./vendors/nice-select');
 
 class ToolbarItem {
@@ -237,13 +238,17 @@ exports.padeditbar = new class {
         // respectively add highlighting to the corresponding button
         for (const thisModuleName of this.dropdowns) {
           const module = $(`#${thisModuleName}`);
-
+          
           if (module.hasClass('popup-show')) {
             $(`li[data-key=${thisModuleName}] > a`).removeClass('selected');
             module.removeClass('popup-show');
           } else if (thisModuleName === moduleName) {
             $(`li[data-key=${thisModuleName}] > a`).addClass('selected');
             module.addClass('popup-show');
+          }
+          else if($('body').click()){
+            $(`li[data-key=${thisModuleName}] > a`).removeClass('selected');
+            module.removeClass('popup-show');
           }
         }
       }

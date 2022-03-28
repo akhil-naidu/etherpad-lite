@@ -42,6 +42,8 @@ exports.postAceInit = (hook, context) => {
         // For each line
         findAndReplace(from, to, this);
       });
+      $('#editorcontainerbox').find('#id-find').val('');
+      $('#editorcontainerbox').find('#id-replace').val('');
       $('#editorcontainerbox').find('#replace').toggleClass('popup-show');
     });
 
@@ -49,6 +51,8 @@ exports.postAceInit = (hook, context) => {
     .find('#replace-close')
     .click((e) => {
       e.preventDefault();
+      $('#editorcontainerbox').find('#id-find').val('');
+      $('#editorcontainerbox').find('#id-replace').val('');
 
       $('#editorcontainerbox').find('#replace').toggleClass('popup-show');
     });
