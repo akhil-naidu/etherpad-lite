@@ -154,13 +154,13 @@
 .mobile-layout .toolbar ul.menu_right > li {
   margin-right: 8px;
 }
-.mobile-layout .toolbar ul.menu_right > li[data-key="showusers"] {
+/* .mobile-layout .toolbar ul.menu_right > li[data-key="showusers"] {
   position: absolute;
   right: 0;
   top: 0;
   bottom: 0;
   margin: 0;
-}
+} */
 .mobile-layout .toolbar ul.menu_right > li[data-key="showusers"] a {
   height: 100%;
   width: 40px;

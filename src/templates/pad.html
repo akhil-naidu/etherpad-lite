@@ -423,7 +423,7 @@
             <% e.begin_block("userlist"); %>
             <div id="connectionstatus"></div>
             <div id="myuser">
-                <div id="mycolorpicker" class="popup"><div class="popup-content">
+                <div id="mycolorpicker" class="popup"><div class="popup-content" style="position: absolute; bottom: -60px; left: -55px; min-width: fit-content;">
                     <div id="colorpicker"></div>
                     <div class="btn-container">
                       <button id="mycolorpickersave" data-l10n-id="pad.colorpicker.save" class="btn btn-primary"></button>
@@ -433,7 +433,7 @@
                 </div></div>
                 <div id="myswatchbox"><div id="myswatch"></div></div>
                 <div id="myusernameform">
-                  <input type="text" id="myusernameedit" disabled="disabled" data-l10n-id="pad.userlist.entername">
+                  <input type="text" id="myusernameedit" minlength="4" maxlength="25" title="length 4-25 characters" disabled="disabled" data-l10n-id="pad.userlist.entername">
                 </div>
             </div>
             <div id="otherusers" aria-role="document">

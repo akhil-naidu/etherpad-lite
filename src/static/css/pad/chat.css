@@ -1,6 +1,6 @@
 #chaticon, #chatbox {
   visibility: hidden;
-  z-index: 400;
+  z-index: 0;
   position: absolute;
   bottom: 0px;
   right: 25px;
