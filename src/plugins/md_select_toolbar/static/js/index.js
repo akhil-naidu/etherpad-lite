@@ -61,6 +61,7 @@ exports.postToolbarInit = (hook, context) => {
   $('#inline_toolbar').css('background-color', '#1f2937');
   $('#inline_toolbar').css('opacity', '0.9');
   $('#inline_toolbar').css('color', '#f9fafb');
+  $('#inline_toolbar').css('height', '40px');
   $('#inline_toolbar').css('border-radius', '8px');
   $('#inline_toolbar').detach().appendTo(padOuter[0]);
 };
