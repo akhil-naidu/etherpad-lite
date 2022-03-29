@@ -1,0 +1,20 @@
+{
+  "author": {
+    "name": "Aman",
+    "email": "sherawataman05@gmail.com"
+  },
+  "bundleDependencies": false,
+  "contributors": [],
+  "dependencies": {},
+  "description": "Checklist  Plugin for Mudoc",
+  "engines": {
+    "node": "*"
+  },
+  "homepage": "https://github.com/akhil-naidu/md_checklist#readme",
+  "name": "ep_checklist",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/akhil-naidu/md_checklist.git"
+  },
+  "version": "0.0.5"
+}
