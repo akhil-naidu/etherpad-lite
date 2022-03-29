@@ -15,7 +15,7 @@
 	"pad.toolbar.italic.title": "Italic (Ctrl+I)",
 	"pad.toolbar.underline.title": "Underline (Ctrl+U)",
 	"pad.toolbar.strikethrough.title": "Strikethrough (Ctrl+5)",
-	"pad.toolbar.ol.title": "Ordered list (Ctrl+Shift+N)",
+	"pad.toolbar.ol.title": "Ordered list (Ctrl+Shift+K)",
 	"pad.toolbar.ul.title": "Unordered List (Ctrl+Shift+L)",
 	"pad.toolbar.indent.title": "Indent (Tab)",
 	"pad.toolbar.unindent.title": "Outdent (Shift+TAB)",
