@@ -67,13 +67,17 @@ exports.postAceInit = function(hook, context){
     e.preventDefault();
     $(form).find('#upload_header').trigger("click");
     $(form).find('#upload_header').on("click",function(e) {        
-      var ext1 = $('#upload_header').val().split('.').pop().toLowerCase();
-      window.console.log(ext1);
-      if($.inArray(ext1, ['gif','png','jpg','jpeg']) == -1) {
-      $(".error_msg").text("Not an Image...");
-      } 
-      else {
-        $(".error_msg").text(""); 
+      // var ext1 = $('#upload_header').val().split('.').pop().toLowerCase();
+      // window.console.log(ext1);
+      // if($.inArray(ext1, ['gif','png','jpg','jpeg']) == -1) {
+      // $(".error_msg").text("Not an Image...");
+      // } 
+      const files1 = e.target.files;
+      const type1 = files[0];
+      const name1 = type.name.split('.').pop().toLowerCase();
+      window.console.log('name image', name1)
+      if((name1=='gif')||(name1=='png')||(name1=='jpg')||(name1=='jpeg')) {
+        // $(".error_msg").text(""); 
         // URL address of uploaded file
         headerImg = URL.createObjectURL(e.target.files[0]); 
         window.console.log(headerImg);
@@ -82,19 +86,27 @@ exports.postAceInit = function(hook, context){
         //   window.console.log('hello', headerURL)
         // },3500);
       }
+      else{
+        window.alert('please upload a valid file ( jpg , gif , png or jpeg)');
+      }
     })    
   })
   $(form).find('#footer-img').click((e)=>{
     e.preventDefault();
     $(form).find('#upload_footer').trigger("click");
     $(form).find('#upload_footer').on("click", function(e) {        
-      var ext2 = $('#upload_footer').val().split('.').pop().toLowerCase();
-      window.console.log(ext2);
-      if($.inArray(ext2, ['gif','png','jpg','jpeg']) == -1) {
-      $(".error_msg").text("Not an Image...");
-      } 
-      else {
-        $(".error_msg").text(""); 
+      // var ext2 = $('#upload_footer').val().split('.').pop().toLowerCase();
+      // window.console.log('this is footer',ext2);
+      // if($.inArray(ext2, ['gif','png','jpg','jpeg']) == -1) {
+      // $(".error_msg").text("Not an Image...");
+      // window.alert('please upload a valid file ( jpg , gif , png or jpeg)')
+      // } 
+      const files = e.target.files;
+      const type = files[0];
+      const name = type.name.split('.').pop().toLowerCase();
+      window.console.log('name image', name)
+      if((name=='gif')||(name=='png')||(name=='jpg')||(name=='jpeg')) {
+        // $(".error_msg").text(""); 
         // URL address of uploaded file
         footerImg = URL.createObjectURL(e.target.files[0]); 
         window.console.log(footerImg);
@@ -103,6 +115,9 @@ exports.postAceInit = function(hook, context){
         //   window.console.log('hello', footerURL)
         // },3500);
       }
+      else{
+        window.alert('please upload a valid file ( jpg , gif , png or jpeg)');
+    }
     })
   })
 
@@ -118,6 +133,9 @@ exports.postAceInit = function(hook, context){
     footerURL = footerImg;
     window.console.log(headerURL);
 
+    $('#editorcontainerbox').find('#id-footer').val('');
+    $('#editorcontainerbox').find('#id-header').val('');
+
     $('#editorcontainerbox').find('#addHeaderFooter').toggleClass('popup-show');
   });
 
@@ -125,6 +143,9 @@ exports.postAceInit = function(hook, context){
     .find('#footer-close')
     .click((e) => {
       e.preventDefault();
+
+      $('#editorcontainerbox').find('#id-footer').val('');
+      $('#editorcontainerbox').find('#id-header').val('');
 
       $('#editorcontainerbox').find('#addHeaderFooter').toggleClass('popup-show');
     });

@@ -21,8 +21,8 @@ describe('ordered_list.js', function () {
       context('and pad shortcut is enabled', function () {
         beforeEach(async function () {
           const originalHTML = helper.padInner$('body').html();
-          makeSureShortcutIsEnabled('cmdShiftN');
-          triggerCtrlShiftShortcut('N');
+          makeSureShortcutIsEnabled('cmdShiftK');
+          triggerCtrlShiftShortcut('K');
           await helper.waitForPromise(() => helper.padInner$('body').html() !== originalHTML);
         });
 
@@ -35,8 +35,8 @@ describe('ordered_list.js', function () {
       context('and pad shortcut is disabled', function () {
         beforeEach(async function () {
           const originalHTML = helper.padInner$('body').html();
-          makeSureShortcutIsDisabled('cmdShiftN');
-          triggerCtrlShiftShortcut('N');
+          makeSureShortcutIsDisabled('cmdShiftK');
+          triggerCtrlShiftShortcut('K');
           try {
             // The HTML should not change. Briefly wait for it to change and fail if it does change.
             await helper.waitForPromise(

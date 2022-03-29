@@ -60,11 +60,16 @@ exports.postToolbarInit = (hook, context) => {
 
     $(document).find('body').find('#imageInput').on('change', (e) => {
       const files = e.target.files;
+      const type = files[0];
+      const name = type.name.split('.').pop().toLowerCase();
+      // console.log('image type',name)
       if (!files.length) {
         return 'Please choose a file to upload first.';
       }
       const file = files[0];
-
+      // console.log('image name',name)
+      if((name=='gif')||(name=='png')||(name=='jpg')||(name=='jpeg')){
+         
       if (!_isValid(file)) {
         return;
       }
@@ -125,6 +130,10 @@ exports.postToolbarInit = (hook, context) => {
           timeout: 60000,
         });
       }
+    }
+      else{
+        window.alert('please upload a valid file ( jpg , gif , png or jpeg)');
+    }
     });
     $(document).find('body').find('#imageInput').trigger('click');
   });

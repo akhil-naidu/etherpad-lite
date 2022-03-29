@@ -2767,7 +2767,7 @@ function Ace2Inner(editorInfo, cssManagers) {
         if (!specialHandled && isTypeForCmdKey &&
             // cmd-shift-N and cmd-shift-1 (orderedlist)
             (evt.metaKey || evt.ctrlKey) && evt.shiftKey &&
-            ((String.fromCharCode(which).toLowerCase() === 'n' && padShortcutEnabled.cmdShiftN) ||
+            ((String.fromCharCode(which).toLowerCase() === 'k' && padShortcutEnabled.cmdShiftK) ||
              (String.fromCharCode(which) === '1' && padShortcutEnabled.cmdShift1))) {
           fastIncorp(9);
           evt.preventDefault();
