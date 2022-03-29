@@ -100,10 +100,9 @@ const padutils = {
    *
    * @param {...*} args - Passed to `console.warn`, with a stack trace appended.
    */
-  warnDeprecated: (...args) => {
-    if (padutils.warnDeprecated.disabledForTestingOnly) return;
+  warnWithStack: (...args) => {
     const err = new Error();
-    if (Error.captureStackTrace) Error.captureStackTrace(err, padutils.warnDeprecated);
+    if (Error.captureStackTrace) Error.captureStackTrace(err, padutils.warnWithStack);
     err.name = '';
     if (err.stack) args.push(err.stack);
     console.warn(...args);

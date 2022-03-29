@@ -253,8 +253,8 @@ class OpIter {
  * @returns {OpIter} Operator iterator object.
  */
 exports.opIterator = (opsStr) => {
-  padutils.warnDeprecated(
-      'Changeset.opIterator() is deprecated; use Changeset.deserializeOps() instead');
+  // padutils.warnWithStack(
+  //     'Changeset.opIterator() is deprecated; use Changeset.deserializeOps() instead');
   return new OpIter(opsStr);
 };
 
@@ -278,7 +278,7 @@ const clearOp = (op) => {
  * @returns {Op}
  */
 exports.newOp = (optOpcode) => {
-  padutils.warnDeprecated('Changeset.newOp() is deprecated; use the Changeset.Op class instead');
+  padutils.warnWithStack('Changeset.newOp() is deprecated; use the Changeset.Op class instead');
   return new Op(optOpcode);
 };
 
@@ -477,8 +477,8 @@ exports.smartOpAssembler = () => {
    *     attribute key, value pairs.
    */
   const appendOpWithText = (opcode, text, attribs, pool) => {
-    padutils.warnDeprecated('Changeset.smartOpAssembler().appendOpWithText() is deprecated; ' +
-                            'use opsFromText() instead.');
+    padutils.warnWithStack('Changeset.smartOpAssembler().appendOpWithText() is deprecated; ' +
+                           'use opsFromText() instead.');
     for (const op of opsFromText(opcode, text, attribs, pool)) append(op);
   };
 
@@ -525,9 +525,6 @@ exports.mergingOpAssembler = () => {
   // ops immediately after it.
   let bufOpAdditionalCharsAfterNewline = 0;
 
-  /**
-   * @param {boolean} [isEndDocument]
-   */
   const flush = (isEndDocument) => {
     if (!bufOp.opcode) return;
     if (isEndDocument && bufOp.opcode === '=' && !bufOp.attribs) {
@@ -679,7 +676,6 @@ exports.stringIterator = (str) => {
  */
 exports.stringAssembler = () => ({
   _str: '',
-  clear() { this._str = ''; },
   /**
    * @param {string} x -
    */
@@ -806,14 +802,13 @@ class TextLinesMutator {
 
   /**
    * Indicates if curLine is already in the splice. This is necessary because the last element in
-   * curSplice is curLine when this line is currently worked on (e.g. when skipping or inserting).
+   * curSplice is curLine when this line is currently worked on (e.g. when skipping are inserting).
+   *
+   * TODO(doc) why aren't removals considered?
    *
    * @returns {boolean} true if curLine is in splice
    */
   _isCurLineInSplice() {
-    // The value of `this._curSplice[1]` does not matter when determining the return value because
-    // `this._curLine` refers to the line number *after* the splice is applied (so after those lines
-    // are deleted).
     return this._curLine - this._curSplice[0] < this._curSplice.length - 2;
   }
 
@@ -835,7 +830,7 @@ class TextLinesMutator {
    * It will skip some newlines by putting them into the splice.
    *
    * @param {number} L -
-   * @param {boolean} includeInSplice - Indicates that attributes are present.
+   * @param {boolean} includeInSplice - indicates if attributes are present
    */
   skipLines(L, includeInSplice) {
     if (!L) return;
@@ -964,7 +959,7 @@ class TextLinesMutator {
         /** @type {string} */
         const theLine = this._curSplice[sline];
         const lineCol = this._curCol;
-        // Insert the chars up to `curCol` and the first new line.
+        // insert the first new line
         this._curSplice[sline] = theLine.substring(0, lineCol) + newLines[0];
         this._curLine++;
         newLines.splice(0, 1);
@@ -980,8 +975,9 @@ class TextLinesMutator {
         this._curLine += newLines.length;
       }
     } else {
-      // There are no additional lines. Although the line is put into splice, curLine is not
-      // increased because there may be more chars in the line (newline is not reached).
+      // there are no additional lines
+      // although the line is put into splice, curLine is not increased, because
+      // there may be more chars in the line (newline is not reached)
       const sline = this._putCurLineInSplice();
       if (!this._curSplice[sline]) {
         const err = new Error(
@@ -1280,13 +1276,6 @@ exports.applyToAttribution = (cs, astr, pool) => {
   return applyZip(astr, unpacked.ops, (op1, op2) => slicerZipperFunc(op1, op2, pool));
 };
 
-/**
- * Applies a changeset to an array of attribute lines.
- *
- * @param {string} cs - The encoded changeset.
- * @param {Array<string>} lines - Attribute lines. Modified in place.
- * @param {AttributePool} pool - Attribute pool.
- */
 exports.mutateAttributionLines = (cs, lines, pool) => {
   const unpacked = exports.unpack(cs);
   const csOps = exports.deserializeOps(unpacked.ops);
@@ -1296,47 +1285,26 @@ exports.mutateAttributionLines = (cs, lines, pool) => {
   // treat the attribution lines as text lines, mutating a line at a time
   const mut = new TextLinesMutator(lines);
 
-  /**
-   * The Ops in the current line from `lines`.
-   *
-   * @type {?Generator<Op>}
-   */
+  /** @type {?Generator<Op>} */
   let lineOps = null;
   let lineOpsNext = null;
 
   const lineOpsHasNext = () => lineOpsNext && !lineOpsNext.done;
-  /**
-   * Returns false if we are on the last attribute line in `lines` and there is no additional op in
-   * that line.
-   *
-   * @returns {boolean} True if there are more ops to go through.
-   */
   const isNextMutOp = () => lineOpsHasNext() || mut.hasMore();
 
-  /**
-   * @returns {Op} The next Op from `lineIter`. If there are no more Ops, `lineIter` is reset to
-   *     iterate over the next line, which is consumed from `mut`. If there are no more lines,
-   *     returns a null Op.
-   */
   const nextMutOp = () => {
     if (!lineOpsHasNext() && mut.hasMore()) {
-      // There are more attribute lines in `lines` to do AND either we just started so `lineIter` is
-      // still null or there are no more ops in current `lineIter`.
       const line = mut.removeLines(1);
       lineOps = exports.deserializeOps(line);
       lineOpsNext = lineOps.next();
     }
-    if (!lineOpsHasNext()) return new Op(); // No more ops and no more lines.
+    if (!lineOpsHasNext()) return new Op();
     const op = lineOpsNext.value;
     lineOpsNext = lineOps.next();
     return op;
   };
   let lineAssem = null;
 
-  /**
-   * Appends an op to `lineAssem`. In case `lineAssem` includes one single newline, adds it to the
-   * `lines` mutator.
-   */
   const outputMutOp = (op) => {
     if (!lineAssem) {
       lineAssem = exports.mergingOpAssembler();
@@ -1353,7 +1321,6 @@ exports.mutateAttributionLines = (cs, lines, pool) => {
   let attOp = new Op();
   while (csOp.opcode || !csOpsNext.done || attOp.opcode || isNextMutOp()) {
     if (!csOp.opcode && !csOpsNext.done) {
-      // coOp done, but more ops in cs.
       csOp = csOpsNext.value;
       csOpsNext = csOps.next();
     }
@@ -1361,21 +1328,18 @@ exports.mutateAttributionLines = (cs, lines, pool) => {
       break; // done
     } else if (csOp.opcode === '=' && csOp.lines > 0 && !csOp.attribs && !attOp.opcode &&
                !lineAssem && !lineOpsHasNext()) {
-      // Skip multiple lines without attributes; this is what makes small changes not order of the
-      // document size.
+      // skip multiple lines; this is what makes small changes not order of the document size
       mut.skipLines(csOp.lines);
       csOp.opcode = '';
     } else if (csOp.opcode === '+') {
       const opOut = copyOp(csOp);
       if (csOp.lines > 1) {
-        // Copy the first line from `csOp` to `opOut`.
         const firstLineLen = csBank.indexOf('\n', csBankIndex) + 1 - csBankIndex;
         csOp.chars -= firstLineLen;
         csOp.lines--;
         opOut.lines = 1;
         opOut.chars = firstLineLen;
       } else {
-        // Either one or no newlines in '+' `csOp`, copy to `opOut` and reset `csOp`.
         csOp.opcode = '';
       }
       outputMutOp(opOut);
@@ -1518,29 +1482,35 @@ exports.identity = (N) => exports.pack(N, N, '', '');
  * spliceStart+numRemoved and inserts newText instead. Also gives possibility to add attributes
  * optNewTextAPairs for the new text.
  *
- * @param {string} orig - Original text.
- * @param {number} start - Index into `orig` where characters should be removed and inserted.
- * @param {number} ndel - Number of characters to delete at `start`.
- * @param {string} ins - Text to insert at `start` (after deleting `ndel` characters).
- * @param {string} [attribs] - Optional attributes to apply to the inserted text.
- * @param {AttributePool} [pool] - Attribute pool.
+ * @param {string} oldFullText - old text
+ * @param {number} spliceStart - where splicing starts
+ * @param {number} numRemoved - number of characters to remove
+ * @param {string} newText - string to insert
+ * @param {string} optNewTextAPairs - new pairs to insert
+ * @param {AttributePool} pool - Attribute pool
  * @returns {string}
  */
-exports.makeSplice = (orig, start, ndel, ins, attribs, pool) => {
-  if (start < 0) throw new RangeError(`start index must be non-negative (is ${start})`);
-  if (ndel < 0) throw new RangeError(`characters to delete must be non-negative (is ${ndel})`);
-  if (start > orig.length) start = orig.length;
-  if (ndel > orig.length - start) ndel = orig.length - start;
-  const deleted = orig.substring(start, start + ndel);
+exports.makeSplice = (oldFullText, spliceStart, numRemoved, newText, optNewTextAPairs, pool) => {
+  const oldLen = oldFullText.length;
+
+  if (spliceStart >= oldLen) {
+    spliceStart = oldLen - 1;
+  }
+  if (numRemoved > oldFullText.length - spliceStart) {
+    numRemoved = oldFullText.length - spliceStart;
+  }
+  const oldText = oldFullText.substring(spliceStart, spliceStart + numRemoved);
+  const newLen = oldLen + newText.length - oldText.length;
+
   const assem = exports.smartOpAssembler();
   const ops = (function* () {
-    yield* opsFromText('=', orig.substring(0, start));
-    yield* opsFromText('-', deleted);
-    yield* opsFromText('+', ins, attribs, pool);
+    yield* opsFromText('=', oldFullText.substring(0, spliceStart));
+    yield* opsFromText('-', oldText);
+    yield* opsFromText('+', newText, optNewTextAPairs, pool);
   })();
   for (const op of ops) assem.append(op);
   assem.endDocument();
-  return exports.pack(orig.length, orig.length + ins.length - ndel, assem.toString(), ins);
+  return exports.pack(oldLen, newLen, assem.toString(), newText);
 };
 
 /**
@@ -1677,8 +1647,8 @@ exports.makeAttribution = (text) => {
  * @param {Function} func - function to call
  */
 exports.eachAttribNumber = (cs, func) => {
-  padutils.warnDeprecated(
-      'Changeset.eachAttribNumber() is deprecated; use attributes.decodeAttribString() instead');
+  padutils.warnWithStack('Changeset.eachAttribNumber() is deprecated; ' +
+                         'use attributes.decodeAttribString() instead');
   let dollarPos = cs.indexOf('$');
   if (dollarPos < 0) {
     dollarPos = cs.length;
@@ -1793,7 +1763,7 @@ exports.copyAText = (atext1, atext2) => {
 };
 
 /**
- * Convert AText to a series of operations. Strips final newline.
+ * Convert AText to a series of operations.
  *
  * @param {AText} atext - The AText to convert.
  * @yields {Op}
@@ -1831,7 +1801,7 @@ exports.opsFromAText = function* (atext) {
  * @param assem - Assembler like SmartOpAssembler TODO add desc
  */
 exports.appendATextToAssembler = (atext, assem) => {
-  padutils.warnDeprecated(
+  padutils.warnWithStack(
       'Changeset.appendATextToAssembler() is deprecated; use Changeset.opsFromAText() instead');
   for (const op of exports.opsFromAText(atext)) assem.append(op);
 };
@@ -1884,8 +1854,7 @@ const attribsAttributeValue = (attribs, key, pool) => {
  * @returns {string}
  */
 exports.opAttributeValue = (op, key, pool) => {
-  padutils.warnDeprecated(
-      'Changeset.opAttributeValue() is deprecated; use an AttributeMap instead');
+  padutils.warnWithStack('Changeset.opAttributeValue() is deprecated; use an AttributeMap instead');
   return attribsAttributeValue(op.attribs, key, pool);
 };
 
@@ -1899,8 +1868,8 @@ exports.opAttributeValue = (op, key, pool) => {
  * @returns {string}
  */
 exports.attribsAttributeValue = (attribs, key, pool) => {
-  padutils.warnDeprecated(
-      'Changeset.attribsAttributeValue() is deprecated; use an AttributeMap instead');
+  padutils.warnWithStack('Changeset.attribsAttributeValue() is deprecated; ' +
+                         'use an AttributeMap instead');
   return attribsAttributeValue(attribs, key, pool);
 };
 
@@ -2011,7 +1980,7 @@ exports.builder = (oldLen) => {
  * @returns {AttributeString}
  */
 exports.makeAttribsString = (opcode, attribs, pool) => {
-  padutils.warnDeprecated(
+  padutils.warnWithStack(
       'Changeset.makeAttribsString() is deprecated; ' +
       'use AttributeMap.prototype.toString() or attributes.attribsToString() instead');
   if (!attribs || !['=', '+'].includes(opcode)) return '';
