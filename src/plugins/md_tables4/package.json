@@ -1,0 +1,56 @@
+{
+  "_from": "ep_tables4",
+  "_id": "ep_tables4@1.0.5",
+  "_inBundle": false,
+  "_integrity": "sha512-PnhgFzYO3S1A5NmnrumO/83dj1zYqWQoUP7LQ+tLZwFjjYvxQE10yfCwMx/UHSqNhZKyEE17aPWgsEHtj9iRVQ==",
+  "_location": "/ep_tables4",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "ep_tables4",
+    "name": "ep_tables4",
+    "escapedName": "ep_tables4",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER"
+  ],
+  "_resolved": "https://registry.npmjs.org/ep_tables4/-/ep_tables4-1.0.5.tgz",
+  "_shasum": "72fd376d20d907640387a2196d74c8d2b7928751",
+  "_spec": "ep_tables4",
+  "_where": "C:\\Users\\om\\Edumatica\\MuDoc",
+  "author": {
+    "name": "Sam Stauffacher"
+  },
+  "bugs": {
+    "url": "https://github.com/WC2-Foundation/ep_tables4/issues"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
+  "description": "Insert tables into your Etherpad documents",
+  "homepage": "https://github.com/WC2-Foundation/ep_tables4#readme",
+  "keywords": [
+    "etherpad-lite",
+    "etherpad",
+    "tables",
+    "tables2",
+    "tables3",
+    "tables4",
+    "appjet",
+    "ether"
+  ],
+  "license": "Apache-2.0",
+  "main": "index.js",
+  "name": "ep_tables4",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WC2-Foundation/ep_tables4.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "1.0.5"
+}
