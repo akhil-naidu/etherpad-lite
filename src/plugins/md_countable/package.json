@@ -1,0 +1,45 @@
+{
+  "_from": "ep_countable",
+  "_id": "ep_countable@0.0.13",
+  "_inBundle": false,
+  "_integrity": "sha512-jAECAkf6NbcteEflag/XrfqXZ3ADSNNo66c7Y+bBpJ1g7+D+gXIUHn6Gg0HyKhcKY8Dcf7SgxAApnybEzF2yrQ==",
+  "_location": "/ep_countable",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "ep_countable",
+    "name": "ep_countable",
+    "escapedName": "ep_countable",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER"
+  ],
+  "_resolved": "https://registry.npmjs.org/ep_countable/-/ep_countable-0.0.13.tgz",
+  "_shasum": "599fde78169d4c73dd24d0601eec31e0f6172fae",
+  "_spec": "ep_countable",
+  "_where": "D:\\etherpad-lite",
+  "author": {
+    "name": "Luc Didry",
+    "email": "luc@didry.org",
+    "url": "https://fiat-tux.fr"
+  },
+  "bugs": {
+    "url": "https://framagit.org/framasoft/Etherpad/ep_countable/-/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {},
+  "deprecated": false,
+  "description": "Displays paragraphs, sentences, words and characters counts.",
+  "license": "Apache-2.0",
+  "name": "ep_countable",
+  "peerDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://framagit.org/framasoft/Etherpad/ep_countable.git"
+  },
+  "version": "0.0.13"
+}
