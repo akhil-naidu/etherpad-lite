@@ -394,12 +394,13 @@ if((evt.type == "keyup") && k != 8 ){
  }
  });
  console.log(testArray, pageBreakNumberArray, l) 
- $('iframe[name="ace_outer"]').contents().find('iframe').contents().find("#innerdocbody").children("div").find('.pageBreak').remove();
+ 
  }
 
- if (k != 8) {
-   callstack.editorInfo.ace_doInsertPageBreak(testArray);
- }
+ if((evt.type == "keyup") && k != 8 && k == 13 ){
+   $('iframe[name="ace_outer"]').contents().find('iframe').contents().find("#innerdocbody").children("div").find('.pageBreak').remove();
+  callstack.editorInfo.ace_doInsertPageBreak(testArray);
+}
   // Up arrow so we can handle up arrow at top of document regain focus to 0 offset
   if(k == 38){
     var selStart = callstack.rep.selStart;
