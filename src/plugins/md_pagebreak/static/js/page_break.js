@@ -16,7 +16,7 @@ let headerURL='';
 let footerURL = '';
 let pageBreakNumberArray = []
 let testArray = [];
-let a4Height = 900;
+let a4Height = 920;
 
 exports.postAceInit = function(hook, context){
   var $outerIframeContents = $('iframe[name="ace_outer"]').contents();
@@ -219,6 +219,8 @@ exports.aceAttribsToClasses = function(hook, context){
   }
 }
 
+// add the below line in the style class of prehtml, when a new page (while printing) has to trigger with page break
+// page-break-after:always;page-break-inside:avoid;-webkit-region-break-inside: avoid;
 // Add the Javascript to Ace inner head, this is for the onClick listener
 exports.aceDomLineProcessLineAttributes = function(name, context){
   if( context.cls.indexOf("pageBreak") !== -1) { var type="pageBreak"; }
@@ -226,7 +228,7 @@ exports.aceDomLineProcessLineAttributes = function(name, context){
   if (tagIndex !== undefined && type){
     // NOTE THE INLINE CSS IS REQUIRED FOR IT TO WORK WITH PRINTING!   Or is it?
     var modifier = {
-      preHtml: `<div class="pageBreak" contentEditable=false style="page-break-after:always;page-break-inside:avoid;-webkit-region-break-inside: avoid;"><div style="display:flex; position:relative; bottom:40px; align-items:end; width:96%; margin-left:4%; justify-content:${footerPosition};"><div style="position:fixed; left:15px;">${l+1} </div><div"><div>${footer} ${footerURL && `<img src="${footerURL}" style="height:40px; width:60px;" />` }</div></div></div></div><div contentEditable=false style="display:flex; position:relative; width:600%; margin-left:-250%; bottom:35px; justify-content:${headerPosition}"><div style="margin:0px 10px 0px 10px;">${header} ${headerURL && `<img src="${headerURL}" style="height:40px; width:60px;" />`}</div></div>`,
+      preHtml: `<div class="pageBreak" contentEditable=false style=""><div style="display:flex; position:relative; bottom:40px; align-items:end; width:96%; margin-left:4%; justify-content:${footerPosition};"><div style="position:fixed; left:15px;">${l+1} </div><div"><div>${footer} ${footerURL && `<img src="${footerURL}" style="height:40px; width:60px;" />` }</div></div></div></div><div contentEditable=false style="display:flex; position:relative; width:600%; margin-left:-250%; bottom:35px; justify-content:${headerPosition}"><div style="margin:0px 10px 0px 10px;">${header} ${headerURL && `<img src="${headerURL}" style="height:40px; width:60px;" />`}</div></div>`,
       postHtml: `</div>`,
       processedMarker: true
     };
