@@ -262,7 +262,7 @@
     "cmdU":      true, /* underline */
     "cmd5":      true, /* strike through */
     "cmdShiftL": true, /* unordered list */
-    "cmdShiftN": true, /* ordered list */
+    "cmdShiftK": true, /* ordered list */
     "cmdShift1": true, /* ordered list */
     "cmdShiftC": true, /* clear authorship */
     "cmdH":      true, /* backspace */
