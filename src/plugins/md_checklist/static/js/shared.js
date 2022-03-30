@@ -28,15 +28,17 @@ var collectContentPost = function(hook, context){
   var state = context.state;
   var lineAttributes = state.lineAttributes
 
-  var tagIndex = cls.indexOf("checklist-not-done");
-  if(tagIndex >= 0){
-    delete lineAttributes['checklist-not-done'];
-  }
-
-  var tagIndex = cls.indexOf("checklist-done");       
-  if(tagIndex >= 0){
-    delete lineAttributes['checklist-done'];
-  }
+  if(cls != null) {
+    var tagIndex = cls.indexOf("checklist-not-done");
+    if(tagIndex >= 0){
+      delete lineAttributes['checklist-not-done'];
+    }
+  
+    var tagIndex = cls.indexOf("checklist-done");       
+    if(tagIndex >= 0){
+      delete lineAttributes['checklist-done'];
+    }
+    }
 };
 
 exports.collectContentPre = collectContentPre;
