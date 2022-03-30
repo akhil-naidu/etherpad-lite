@@ -16,6 +16,7 @@ let headerURL='';
 let footerURL = '';
 let pageBreakNumberArray = []
 let testArray = [];
+let a4Height = 900;
 
 exports.postAceInit = function(hook, context){
   var $outerIframeContents = $('iframe[name="ace_outer"]').contents();
@@ -378,7 +379,7 @@ if((evt.type == "keyup") && k != 8 ){
  l=$('iframe[name="ace_outer"]').contents().find('iframe').contents().find("#innerdocbody").children("div").find('.pageBreak').length;
  let height = $(this).height(); // the height of the line
  y=y+height;
- i=((460*j)+(40*l));
+ i=((a4Height*j)+(40*l));
 //  i = 500*(l+1);
  if(y>i){
    pageBreakNumberArray.push(index)
