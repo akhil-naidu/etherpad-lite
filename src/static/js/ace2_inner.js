@@ -2789,7 +2789,7 @@ function Ace2Inner(editorInfo, cssManagers) {
             padShortcutEnabled.cmdH) {
           fastIncorp(20);
           evt.preventDefault();
-          doDeleteKey();
+          parent.parent.$('#editbar').find('#findAndReplace').click();
           specialHandled = true;
         }
         if (evt.ctrlKey === true && evt.which === 36 &&
