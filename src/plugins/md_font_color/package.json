@@ -1,0 +1,64 @@
+{
+  "_from": "ep_font_color",
+  "_id": "ep_font_color@0.0.61",
+  "_inBundle": false,
+  "_integrity": "sha512-ETyg8tf21J+2uUwdBd6IZsgF4sk128GVbGJNFOI0tMRPaTw1qTnUG9hQEW/OOl+nGlLTGnAdHpKVOdLpCydJzA==",
+  "_location": "/ep_font_color",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "ep_font_color",
+    "name": "ep_font_color",
+    "escapedName": "ep_font_color",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/ep_font_color/-/ep_font_color-0.0.61.tgz",
+  "_shasum": "0868a3a2cce4642c026e28fce3a8f354227bd6dd",
+  "_spec": "ep_font_color",
+  "_where": "/Users/dev/Github/Edumatica/MuDocs",
+  "author": {
+    "name": "John McLear",
+    "email": "john@mclear.co.uk"
+  },
+  "bugs": {
+    "url": "https://github.com/JohnMcLear/ep_font_color/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {},
+  "deprecated": false,
+  "description": "Apply colors to fonts",
+  "devDependencies": {
+    "eslint": "^8.11.0",
+    "eslint-config-etherpad": "^3.0.9",
+    "typescript": "^4.6.2"
+  },
+  "engines": {
+    "node": ">=12.17.0"
+  },
+  "funding": {
+    "type": "individual",
+    "url": "https://etherpad.org/"
+  },
+  "homepage": "https://github.com/JohnMcLear/ep_font_color#readme",
+  "license": "Apache-2.0",
+  "name": "ep_font_color",
+  "peerDependencies": {
+    "ep_etherpad-lite": ">=1.8.6"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JohnMcLear/ep_font_color.git"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix ."
+  },
+  "version": "0.0.61"
+}

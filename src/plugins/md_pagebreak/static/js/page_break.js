@@ -136,8 +136,8 @@ exports.postAceInit = function(hook, context){
     footerURL = footerImg;
     window.console.log(headerURL);
 
-    $('#editorcontainerbox').find('#id-footer').val('');
-    $('#editorcontainerbox').find('#id-header').val('');
+    // $('#editorcontainerbox').find('#id-footer').val('');
+    // $('#editorcontainerbox').find('#id-header').val('');
 
     $('#editorcontainerbox').find('#addHeaderFooter').toggleClass('popup-show');
   });
@@ -147,8 +147,8 @@ exports.postAceInit = function(hook, context){
     .click((e) => {
       e.preventDefault();
 
-      $('#editorcontainerbox').find('#id-footer').val('');
-      $('#editorcontainerbox').find('#id-header').val('');
+      // $('#editorcontainerbox').find('#id-footer').val('');
+      // $('#editorcontainerbox').find('#id-header').val('');
 
       $('#editorcontainerbox').find('#addHeaderFooter').toggleClass('popup-show');
     });
