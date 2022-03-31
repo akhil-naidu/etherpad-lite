@@ -295,7 +295,7 @@ function doRemovePageBreak(){
   }
 }
 
-function doInsertPageBreak(insertAtLineNumber){
+function doInsertPageBreak(insertAtLineNumber, bool){
   // this.editorInfo.ace_doReturnKey();
   // var rep = this.rep;
   // var documentAttributeManager = this.documentAttributeManager;
@@ -327,7 +327,7 @@ function doInsertPageBreak(insertAtLineNumber){
   // Get caret focus
   this.editorInfo.ace_focus();
   // Insert a line
-  this.editorInfo.ace_doReturnKey();
+  bool && this.editorInfo.ace_doReturnKey();
   // Get the document
   var document = this.editorInfo.ace_getDocument();
   // Update the selection from the rep
@@ -418,15 +418,16 @@ if((evt.type == "keyup") && k != 8 ){
  if((evt.type == "keyup") && (k == 13) ){
   if (k != 8) {
   $('iframe[name="ace_outer"]').contents().find('iframe').contents().find("#innerdocbody").children("div").find('.pageBreak').remove();
-  callstack.editorInfo.ace_doInsertPageBreak(testArray);
+  callstack.editorInfo.ace_doInsertPageBreak(testArray, false);
   }  
 }
 
  if((evt.type == "keyup") && (evt.ctrlKey && k == 118 )){
   console.log(`triggering ctrl + v`);
+  // this.editorInfo.ace_doReturnKey();
   if (k != 8) {
   $('iframe[name="ace_outer"]').contents().find('iframe').contents().find("#innerdocbody").children("div").find('.pageBreak').remove();
-  callstack.editorInfo.ace_doInsertPageBreak(testArray);
+  callstack.editorInfo.ace_doInsertPageBreak(testArray, true);
   }  
 }
   // Up arrow so we can handle up arrow at top of document regain focus to 0 offset
