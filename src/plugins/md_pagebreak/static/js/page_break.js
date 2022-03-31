@@ -327,7 +327,7 @@ function doInsertPageBreak(insertAtLineNumber){
   // Get caret focus
   this.editorInfo.ace_focus();
   // Insert a line
-  // this.editorInfo.ace_doReturnKey();
+  this.editorInfo.ace_doReturnKey();
   // Get the document
   var document = this.editorInfo.ace_getDocument();
   // Update the selection from the rep
@@ -410,9 +410,24 @@ if((evt.type == "keyup") && k != 8 ){
  
  }
 
- if((evt.type == "keyup") && k != 8 && (k == 13 || k == 118) ){
-   $('iframe[name="ace_outer"]').contents().find('iframe').contents().find("#innerdocbody").children("div").find('.pageBreak').remove();
+//  if((evt.type == "keyup") && k != 8 && (k == 13 || k == 118) ){
+//    $('iframe[name="ace_outer"]').contents().find('iframe').contents().find("#innerdocbody").children("div").find('.pageBreak').remove();
+//   callstack.editorInfo.ace_doInsertPageBreak(testArray);
+// }
+
+ if((evt.type == "keyup") && (k == 13) ){
+  if (k != 8) {
+  $('iframe[name="ace_outer"]').contents().find('iframe').contents().find("#innerdocbody").children("div").find('.pageBreak').remove();
   callstack.editorInfo.ace_doInsertPageBreak(testArray);
+  }  
+}
+
+ if((evt.type == "keyup") && (evt.ctrlKey && k == 118 )){
+  console.log(`triggering ctrl + v`);
+  if (k != 8) {
+  $('iframe[name="ace_outer"]').contents().find('iframe').contents().find("#innerdocbody").children("div").find('.pageBreak').remove();
+  callstack.editorInfo.ace_doInsertPageBreak(testArray);
+  }  
 }
   // Up arrow so we can handle up arrow at top of document regain focus to 0 offset
   if(k == 38){
