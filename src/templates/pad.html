@@ -423,14 +423,7 @@
             <% e.begin_block("userlist"); %>
             <div id="connectionstatus"></div>
             <div id="myuser">
-                <div id="mycolorpicker" class="popup"><div class="popup-content" style="position: absolute; bottom: -60px; left: -55px; min-width: fit-content;">
-                    <div id="colorpicker"></div>
-                    <div class="btn-container">
-                      <button id="mycolorpickersave" data-l10n-id="pad.colorpicker.save" class="btn btn-primary"></button>
-                      <button id="mycolorpickercancel" data-l10n-id="pad.colorpicker.cancel" class="btn btn-default"></button>
-                      <span id="mycolorpickerpreview" class="myswatchboxhoverable"></span>
-                    </div>
-                </div></div>
+                
                 <div id="myswatchbox"><div id="myswatch"></div></div>
                 <div id="myusernameform">
                   <input type="text" id="myusernameedit" minlength="4" maxlength="25" title="length 4-25 characters" disabled="disabled" data-l10n-id="pad.userlist.entername">
@@ -444,13 +437,21 @@
             <div id="userlistbuttonarea"></div>
             <% e.end_block(); %>
         </div></div>
+        <div id="mycolorpicker" class="popup"><div class="popup-content" style="position: fixed; bottom: 50px; min-width: fit-content;">
+          <div id="colorpicker"></div>
+          <div class="btn-container">
+            <button id="mycolorpickersave" data-l10n-id="pad.colorpicker.save" class="btn btn-primary"></button>
+            <button id="mycolorpickercancel" data-l10n-id="pad.colorpicker.cancel" class="btn btn-default"></button>
+            <span id="mycolorpickerpreview" class="myswatchboxhoverable"></span>
+          </div>
+      </div></div>
 
 
         <!----------------------------->
         <!----------- CHAT ------------>
         <!----------------------------->
 
-        <div id="chaticon" class="visible" onclick="chat.show();return false;" title="Chat (Alt C)" style="z-index: 2;">
+        <div id="chaticon" class="visible" onclick="chat.show();return false;" title="Chat (Alt C)" style="z-index: 500;">
             <span id="chatlabel" data-l10n-id="pad.chat"></span>
             <span class="buttonicon buttonicon-chat"></span>
             <span id="chatcounter">0</span>
