@@ -50,6 +50,6 @@ body {
   width: 0; /* hide when the container is empty */
 }
 
-.mobile-layout #editorcontainerbox {
+/* .mobile-layout #editorcontainerbox {
   margin-bottom: 39px; /* Leave space for the bottom toolbar on mobile */
-}
+} */

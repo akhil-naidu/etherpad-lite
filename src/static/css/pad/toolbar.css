@@ -11,7 +11,7 @@
 }
 .toolbar ul {
   list-style: none;
-  z-index: 1;
+  z-index: 500;
   overflow: hidden;
   margin: 0;
   display: flex;
