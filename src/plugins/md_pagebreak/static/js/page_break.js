@@ -228,8 +228,15 @@ exports.aceDomLineProcessLineAttributes = function(name, context){
   var tagIndex = context.cls.indexOf(type);
   if (tagIndex !== undefined && type){
     // NOTE THE INLINE CSS IS REQUIRED FOR IT TO WORK WITH PRINTING!   Or is it?
+//     .disable-select {
+//     user-select: none; /* supported by Chrome and Opera */
+//    -webkit-user-select: none; /* Safari */
+//    -khtml-user-select: none; /* Konqueror HTML */
+//    -moz-user-select: none; /* Firefox */
+//    -ms-user-select: none; /* Internet Explorer/Edge */
+// }
     var modifier = {
-      preHtml: `<div class="pageBreak" contentEditable=false style=""><div style="display:flex; position:relative; bottom:40px; align-items:end; width:96%; margin-left:4%; justify-content:${footerPosition};"><div style="position:fixed; left:15px;">${test} </div><div"><div>${footer} ${footerURL && `<img src="${footerURL}" style="height:40px; width:60px;" />` }</div></div></div></div><div contentEditable=false style="display:flex; position:relative; width:600%; margin-left:-250%; bottom:35px; justify-content:${headerPosition}"><div style="margin:0px 10px 0px 10px;">${header} ${headerURL && `<img src="${headerURL}" style="height:40px; width:60px;" />`}</div></div>`,
+      preHtml: `<div class="pageBreak" contentEditable=false style="user-select: none; -webkit-user-select:none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none;"><div style="display:flex; position:relative; bottom:40px; align-items:end; width:96%; margin-left:4%; justify-content:${footerPosition};"><div style="position:fixed; left:15px;">${test} </div><div"><div>${footer} ${footerURL && `<img src="${footerURL}" style="height:40px; width:60px;" />` }</div></div></div></div><div contentEditable=false style="display:flex; position:relative; width:600%; margin-left:-250%; bottom:35px; justify-content:${headerPosition}"><div style="margin:0px 10px 0px 10px;">${header} ${headerURL && `<img src="${headerURL}" style="height:40px; width:60px;" />`}</div></div>`,
       postHtml: `</div>`,
       processedMarker: true
     };
@@ -403,7 +410,7 @@ if((evt.type == "keyup") && k != 8 ){
  
  }
 
- if((evt.type == "keyup") && k != 8 && k == 13 ){
+ if((evt.type == "keyup") && k != 8 && (k == 13 || k == 118) ){
    $('iframe[name="ace_outer"]').contents().find('iframe').contents().find("#innerdocbody").children("div").find('.pageBreak').remove();
   callstack.editorInfo.ace_doInsertPageBreak(testArray);
 }
