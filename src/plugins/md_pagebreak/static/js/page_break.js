@@ -17,6 +17,7 @@ let footerURL = '';
 let pageBreakNumberArray = []
 let testArray = [];
 let a4Height = 920;
+let test = 0;
 
 exports.postAceInit = function(hook, context){
   var $outerIframeContents = $('iframe[name="ace_outer"]').contents();
@@ -228,7 +229,7 @@ exports.aceDomLineProcessLineAttributes = function(name, context){
   if (tagIndex !== undefined && type){
     // NOTE THE INLINE CSS IS REQUIRED FOR IT TO WORK WITH PRINTING!   Or is it?
     var modifier = {
-      preHtml: `<div class="pageBreak" contentEditable=false style=""><div style="display:flex; position:relative; bottom:40px; align-items:end; width:96%; margin-left:4%; justify-content:${footerPosition};"><div style="position:fixed; left:15px;">${l+1} </div><div"><div>${footer} ${footerURL && `<img src="${footerURL}" style="height:40px; width:60px;" />` }</div></div></div></div><div contentEditable=false style="display:flex; position:relative; width:600%; margin-left:-250%; bottom:35px; justify-content:${headerPosition}"><div style="margin:0px 10px 0px 10px;">${header} ${headerURL && `<img src="${headerURL}" style="height:40px; width:60px;" />`}</div></div>`,
+      preHtml: `<div class="pageBreak" contentEditable=false style=""><div style="display:flex; position:relative; bottom:40px; align-items:end; width:96%; margin-left:4%; justify-content:${footerPosition};"><div style="position:fixed; left:15px;">${test} </div><div"><div>${footer} ${footerURL && `<img src="${footerURL}" style="height:40px; width:60px;" />` }</div></div></div></div><div contentEditable=false style="display:flex; position:relative; width:600%; margin-left:-250%; bottom:35px; justify-content:${headerPosition}"><div style="margin:0px 10px 0px 10px;">${header} ${headerURL && `<img src="${headerURL}" style="height:40px; width:60px;" />`}</div></div>`,
       postHtml: `</div>`,
       processedMarker: true
     };
@@ -305,7 +306,9 @@ function doInsertPageBreak(insertAtLineNumber){
 //  $('iframe[name="ace_outer"]').contents().find('iframe').contents().find("#innerdocbody").children("div").find('.pageBreak').remove();
  var rep = this.rep;
  var documentAttributeManager = this.documentAttributeManager;
+ test = 0;
  insertAtLineNumber.forEach((lineNumber) => {
+  test = test + 1
  var isPageBreak = documentAttributeManager.getAttributeOnLine(lineNumber + 1, 'pageBreak');
  if(!isPageBreak){ // if its already a PageBreak item
  documentAttributeManager.setAttributeOnLine(lineNumber, 'pageBreak', 'pageBreak'); // make the line a page break
