@@ -7,14 +7,14 @@
 }
 
 #tocItems {
-  line-height: 40px !important;
+  line-height: 25px !important;
 }
 
 .plugin-ep_resizable_bars #toc {
   min-width: 186px !important;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1000px) {
   #toc {
     padding-top: 10px !important
   }
