@@ -218,7 +218,7 @@ const Ace2Editor = function () {
 
     // <body> tag
     outerDocument.body.id = 'outerdocbody';
-    outerDocument.body.classList.add('outerdocbody', ...pluginUtils.clientPluginNames());
+    outerDocument.body.classList.add('outerdocbody', ...pluginUtils.clientPluginNames(), window.clientVars.readonly ? 'readonly' : 'readwrite');
     const sideDiv = outerDocument.createElement('div');
     sideDiv.id = 'sidediv';
     sideDiv.classList.add('sidediv');

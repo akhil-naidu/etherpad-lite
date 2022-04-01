@@ -481,7 +481,7 @@ const pad = {
 
     if (window.clientVars.readonly) {
       chat.hide();
-      $('#myusernameedit').attr('disabled', true);
+      // $('#myusernameedit').attr('disabled', true);
       $('#chatinput').attr('disabled', true);
       $('#chaticon').hide();
       $('#options-chatandusers').parent().hide();
