@@ -19,11 +19,11 @@
 
 .toch1{
   margin-left:0px;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
 }
 .toch2{
   margin-left:10px;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
 }
 .toch3{
   margin-left:20px;
@@ -31,15 +31,19 @@
 }
 .toch4{
   margin-left:30px;
-  font-size:1rem;
+  font-size:0.9rem;
 }
 .toch5{
   margin-left:30px;
-  font-size:1rem;
+  font-size:0.8rem;
 }
 .toch6{
   margin-left:30px;
-  font-size:1rem;
+  font-size:0.7rem;
+}
+
+a:link {
+  text-decoration: none;
 }
 
 
@@ -56,32 +60,32 @@
 
 /* The behavior for incrementing and the prefix */
 .toch1:before {
-  content: counter(first) ". " ;
+  /* content: counter(first) ". " ; */
   counter-increment: first;
 }
 
 .toch2:before {
-  content: counter(first) "." counter(second) ". ";
+  /* content: counter(first) "." counter(second) ". "; */
   counter-increment: second;
 }
 
 .toch3:before {
-  content: counter(first) "." counter(second) "." counter(third) ". ";
+  /* content: counter(first) "." counter(second) "." counter(third) ". "; */
   counter-increment: third 1;
 }
 
 .toch4:before {
-  content: counter(first) "." counter(second) "." counter(third) "." counter(fourth) ". ";
+  /* content: counter(first) "." counter(second) "." counter(third) "." counter(fourth) ". "; */
   counter-increment: fourth 1;
 }
 
 .toch5:before {
-  content: counter(first) "." counter(second) "." counter(third) "." counter(fourth) "." counter(fifth) ". ";
+  /* content: counter(first) "." counter(second) "." counter(third) "." counter(fourth) "." counter(fifth) ". "; */
   counter-increment: fifth 1;
 }
 
 .toch6:before {
-  content: counter(first) "." counter(second) "." counter(third) "." counter(fourth) "." counter(fifth) "." counter(sixth) ". ";
+  /* content: counter(first) "." counter(second) "." counter(third) "." counter(fourth) "." counter(fifth) "." counter(sixth) ". "; */
   counter-increment: sixth 1;
 }
 
