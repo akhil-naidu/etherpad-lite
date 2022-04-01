@@ -233,10 +233,10 @@ exports.aceDomLineProcessLineAttributes = function(name, context){
 //    -webkit-user-select: none; /* Safari */
 //    -khtml-user-select: none; /* Konqueror HTML */
 //    -moz-user-select: none; /* Firefox */
-//    -ms-user-select: none; /* Internet Explorer/Edge */
+//    -ms-user-select: none; /* Internet Explorer/Edge */  
 // }
     var modifier = {
-      preHtml: `<div class="pageBreak" contentEditable=false style="user-select: none; -webkit-user-select:none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none;"><div style="display:flex; position:relative; bottom:40px; align-items:end; width:96%; margin-left:4%; justify-content:${footerPosition};"><div style="position:fixed; left:15px;">${test} </div><div"><div>${footer} ${footerURL && `<img src="${footerURL}" style="height:40px; width:60px;" />` }</div></div></div></div><div contentEditable=false style="display:flex; position:relative; width:600%; margin-left:-250%; bottom:35px; justify-content:${headerPosition}"><div style="margin:0px 10px 0px 10px;">${header} ${headerURL && `<img src="${headerURL}" style="height:40px; width:60px;" />`}</div></div>`,
+      preHtml: `<div class="pageBreak" contentEditable=false style="user-select: none; -webkit-user-select:none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none;"><div style="display:block; position:relative; bottom:48px; align-items:end;"><div style="position:fixed; left:15px;">${test} </div><div style="position:fixed; width:96%; left:4%; display:flex; justify-content:${footerPosition};"><div style="margin:0px 10px 0px 10px;">${footer} ${footerURL && `<img src="${footerURL}" style="height:40px; width:60px;" />` }</div></div></div></div><div contentEditable=false style="display:flex; position:relative; width:114%; margin-left:-7%; bottom:35px; justify-content:${headerPosition}"><div style="margin:0px 10px 0px 10px;">${header} ${headerURL && `<img src="${headerURL}" style="height:40px; width:60px;" />`}</div></div>`,
       postHtml: `</div>`,
       processedMarker: true
     };
